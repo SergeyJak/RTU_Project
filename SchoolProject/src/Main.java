@@ -51,8 +51,8 @@ public class Main {
                     }else
                         System.out.println(Constants.WRONG_PASS);
 
-                }else if (userTable.getString(Constants.USER_COLUMN).equals(null)){
-                    System.out.println(Constants.TRY_AGAIN);
+                }else {
+                    userTable.getString(Constants.USER_COLUMN);
                 }
 
             connection.close();
@@ -61,3 +61,4 @@ public class Main {
 
     }
 }
+//wewqewqe

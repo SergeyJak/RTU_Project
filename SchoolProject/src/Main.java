@@ -27,7 +27,6 @@ public class Main {
 
             ResultSet userTable = connection.executeQuery("select * from main.user where " + Constants.USER_COLUMN + " = '" + userLogin + "'");
 
-            System.out.println(userTable.getString(Constants.USER_COLUMN).equals(userLogin));
 
             while (userTable.next())
 

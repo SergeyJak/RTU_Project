@@ -10,13 +10,8 @@ public class ConnectionToDB {
     public static java.sql.Connection connectionToDb() throws ClassNotFoundException, SQLException, IOException {
 
 
-//        final Configuration configuration = new Configuration();
-//        configuration.configure("hibernate.cfg.xml");
 
         String myDriver = "com.mysql.cj.jdbc.Driver";
-//        String url = configuration.getProperty("hibernate.connection.url");
-//        String user = configuration.getProperty("hibernate.connection.username");
-//        String password = configuration.getProperty("hibernate.connection.password");
         String ip = getProperties("host.ip");
         String port = getProperties("host.port");
         String user = getProperties("db.login");
@@ -28,6 +23,7 @@ public class ConnectionToDB {
 
         Class.forName(myDriver);
         return DriverManager.getConnection(url, user, password);
+
     }
     private static String getProperties(String propertiesName) throws IOException {
 

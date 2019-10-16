@@ -21,8 +21,10 @@ public class ConnectionToDB {
         String port = getProperties("host.port");
         String user = getProperties("db.login");
         String password = getProperties("db.password");
+        String dbname = getProperties("db.name");
 
-        String url = "jdbc:mysql://"+ ip + ":" +port +"/main";
+        String url = "jdbc:mysql://"+ ip + ":" + port +"/" + dbname;
+
 
         Class.forName(myDriver);
         return DriverManager.getConnection(url, user, password);
@@ -35,7 +37,7 @@ public class ConnectionToDB {
 
         FileInputStream file;
 
-        String path = "C:\\Users\\sergejsj1\\SchoolProject\\src\\main.properties";
+        String path = "C:\\Users\\sergejsj1\\Git_new\\SchoolProject\\src\\main.properties";
 //        String path = "main.properties";
 
         file = new FileInputStream(path);

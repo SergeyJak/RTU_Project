@@ -28,7 +28,9 @@ public class Constants {
 
     //actions strings
     public static final String EXIT = "exit";
-    public static final String NEW = "new";
-    public static final String SEE_ALL = "see all";
+    public static final String NEW_ORD = "new order";
+    public static final String NEW_SERV = "new services";
+    public static final String SEE_ORD = "see orders";
+    public static final String SEE_SERV = "see services";
     public static final String FIND = "find";
 }

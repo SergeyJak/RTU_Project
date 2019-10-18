@@ -19,13 +19,12 @@ public class CommonMethods {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         while (rs.next()) {
-            String firstProd = rs.getString("product_name");
+            String nameProd = rs.getString("product_name");
             String descriptionProd = rs.getString("product_description");
-            Date dateCreated = rs.getDate("request_time");
-            String statusProd = rs.getString("status");
+            Float porPrice = rs.getFloat("product_price");
 
             // print the results
-            System.out.format("%s, %s, %s, %s\n", firstProd, descriptionProd, dateCreated, statusProd);
+            System.out.format("Name: %s\t\t Model: %s\t seconds %s\n", nameProd, descriptionProd, porPrice);
         }
 
     }

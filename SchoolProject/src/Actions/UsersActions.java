@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static DataBase.ConnectionToDB.connectionToDb;
+import static Resources.CommonMethods.ClearScreen;
+import static Resources.CommonMethods.returnProductsDescriptionByQuery;
 import static Resources.Constants.DO_CHOICE;
 import static Resources.Constants.EXIT;
 import static Resources.Constants.INFORMATION_MSG;
@@ -31,6 +33,9 @@ class UsersActions {
             mainChoice = in.nextLine();
 
             switch (mainChoice) {
+                case "products":
+                    listProducts();
+                    break;
                 case NEW_ORD:
                     addNewOrder(userId);
                     break;
@@ -53,6 +58,12 @@ class UsersActions {
         } while (!mainChoice.equals(EXIT));
 
         connectionToDb().close();
+    }
+    private static void listProducts() throws SQLException, IOException, ClassNotFoundException {
+        ClearScreen();
+
+        String query = "SELECT * FROM main.products where product_count != 0";
+        returnProductsDescriptionByQuery(query);
     }
     private static void addNewOrder(int userId){
 

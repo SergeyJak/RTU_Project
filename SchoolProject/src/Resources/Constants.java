@@ -24,7 +24,7 @@ public class Constants {
     public static final String ENTER_PRODUCT_DESCRIPTION = "Enter description: ";
     public static final String RETURN_TO_LOGIN = "Return to login";
     public static final String DO_CHOICE ="Please choose action: ";
-    public static final String INFORMATION_MSG = "Request product type  - new\nSee my all requests type - see all\nFind current request by name - find\nExit - exit";
+    public static final String INFORMATION_MSG = "Products list   -   products\nMake order   -   new order\nExit - exit";
 
     //actions strings
     public static final String EXIT = "exit";
@@ -33,4 +33,5 @@ public class Constants {
     public static final String SEE_ORD = "see orders";
     public static final String SEE_SERV = "see services";
     public static final String FIND = "find";
+    public static final String PRODUCTS = "products";
 }

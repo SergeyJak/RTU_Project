@@ -1,20 +1,22 @@
 package Resources;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import static DataBase.ConnectionToDB.connectionToDb;
 
 public class CommonMethods {
-    public static void ClearScreen(){
-        try{
+    public static void ClearScreen() {
+        try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
+
     public static void returnProductsDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
@@ -24,8 +26,29 @@ public class CommonMethods {
             Float porPrice = rs.getFloat("product_price");
 
             // print the results
-            System.out.format("Name: %s\t\t Model: %s\t seconds %s\n", nameProd, descriptionProd, porPrice);
+            System.out.format("Name: %s\t\t Model: %s\t EUR %s\n", nameProd, descriptionProd, porPrice);
         }
 
     }
+
+    public static void insertOrderLine(int userId, int productId, int productCount, float totalPrice, String prodDelivery, String prodDescription) throws SQLException, IOException, ClassNotFoundException {
+        String query = "insert into main.order (user_id, product_id, count, total_price, delivery, description) values (?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement preparedStmt = connectionToDb().prepareStatement(query);
+        preparedStmt.setInt(1, userId);
+        preparedStmt.setInt(2, productId);
+        preparedStmt.setInt(3, productCount);
+        preparedStmt.setFloat(4, totalPrice);
+        preparedStmt.setString(5, prodDelivery);
+        preparedStmt.setString(6, prodDescription);
+        preparedStmt.execute();
+    }
+    public static void updateOrderCount(int productCount, int productId) throws SQLException, IOException, ClassNotFoundException {
+        String query = "UPDATE main.products SET product_count = " + productCount + " WHERE product_id = " + productId + ";";
+
+        connectionToDb().prepareStatement(query).execute();
+    }
 }
+
+
+

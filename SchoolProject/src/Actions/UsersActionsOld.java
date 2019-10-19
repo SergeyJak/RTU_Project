@@ -15,7 +15,6 @@ import static Resources.Constants.ENTER_PRODUCT_DESCRIPTION;
 import static Resources.Constants.ENTER_PRODUCT_NAME;
 import static Resources.Constants.EXIT;
 import static Resources.Constants.FIND;
-import static Resources.Constants.INFORMATION_MSG;
 import static Resources.Constants.RETURN_TO_LOGIN;
 import static Resources.Constants.WRONG_CHOICE;
 
@@ -29,8 +28,6 @@ public class UsersActionsOld {
         Scanner in = new Scanner(System.in);
 
         connectionToDb();
-
-        System.out.println(INFORMATION_MSG);
 
 
         do {

@@ -17,7 +17,7 @@ public class UsersActions {
 
         connectionToDb();
 
-        System.out.println(INFORMATION_MSG); //Message should be updated
+        System.out.println(INF_MSG_USER_MAIN); //Message should be updated
 
 
         do {
@@ -51,25 +51,29 @@ public class UsersActions {
 
         connectionToDb().close();
     }
-    private static void listProducts() throws SQLException, IOException, ClassNotFoundException {
+    private static void listProducts() throws SQLException, IOException, ClassNotFoundException { //full list of products which are on warehouse
         ClearScreen();
 
         String query = "SELECT * FROM main.products where product_count != 0";
         returnProductsDescriptionByQuery(query);
     }
-    private static void addNewOrder(int userId) throws SQLException, IOException, ClassNotFoundException {
+    private static void addNewOrder(int userId) throws SQLException, IOException, ClassNotFoundException { // new order method
         Scanner in = new Scanner(System.in);
-        System.out.println("Please enter order, or choose \"exit\" to return in main menu:");
-        System.out.println("Enter Product Name: ");
+        System.out.println(INF_MSG_ORDER_CHOICE);
+        System.out.println(ENTER_PROD_NAME);
         String productName = in.nextLine();
-        System.out.println("Enter Product Model: ");
+
+        if (productName.equals(EXIT)){          //Exit scenarios
+            ClearScreen();
+          userMainChoice(userId);
+        }
+
+        System.out.println(ENTER_PROD_MODEL);
         String productModel = in.nextLine();
 
         String checkQuery = "SELECT * FROM main.products where product_name = '" + productName + "' and product_description = '" + productModel + "' and product_count > 0;";
 
-
         checkProductsDescriptionByQuery(checkQuery, userId);
-
     }
     private static void addNewServiceRequest(int userId){
 
@@ -80,46 +84,56 @@ public class UsersActions {
     private static void seeAllServices(int userId){
 
     }
+
+
+
     private static void checkProductsDescriptionByQuery(String query, int userId) throws SQLException, ClassNotFoundException, IOException {
+        int productId;
+        String nameProd;
+        String descriptionProd;
+        float porPrice;
+        int productCount;
+        String accept;
+        String delivery;
+        String description;
+
         Scanner in = new Scanner(System.in);
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         ClearScreen();
 
         if (rs.next()) {
-            System.out.println("All information about your product: ");
+            System.out.println(INF_MSG_PRODUCT);
 
-            int productId = rs.getInt(1);
-            String nameProd = rs.getString("product_name");
-            String descriptionProd = rs.getString("product_description");
-            float porPrice = rs.getFloat("product_price");
-            int productCount = rs.getInt(5);
+            productId = rs.getInt(PROD_PRODUCT_ID);
+            nameProd = rs.getString(PROD_PRODUCT_NAME);
+            descriptionProd = rs.getString(PROD_PRODUCT_DESCRIPTION);
+            porPrice = rs.getFloat(PROD_PRODUCT_PRICE);
+            productCount = rs.getInt(PROD_PRODUCT_COUNT);
+
             System.out.format("Name: %s\t Model: %s\t EUR %s\n", nameProd, descriptionProd, porPrice);
 
 
-            System.out.print("Accept you choice yes / no: ");
-            String accept = in.nextLine();
-            if (accept.equals("yes")) {
-                System.out.println("Choose delivery(shop | mail): ");
-                String delivery = in.nextLine();
-                System.out.println("Comments: ");
-                String description = in.nextLine();
+            System.out.print("Accept you choice " + YES + " / "+  NO +": ");
+            accept = in.nextLine();
+
+            if (accept.equals(YES)) {
+
+                System.out.println(DELIVERY_CHOICE);
+                delivery = in.nextLine();
+                System.out.println(ENTER_COMMENT);
+                description = in.nextLine();
 
                 insertOrderLine(userId, productId, 1, porPrice, delivery, description);
 
-                productCount = productCount - 1;
+                productCount = productCount - 1; //after order accept product count should be less for one count
 
                 updateOrderCount(productCount, productId);
 
-                System.out.println("Product added!!!");
-
-            } else {
-                System.out.println("Return");
+                System.out.println(ORDER_ACCEPTED);
             }
-
         } else {
-            System.out.println("Wrong Product name or not exist in wearhous");
+            System.out.println(WRONG_PRODUCT_CHOICE);
         }
-
     }
 }

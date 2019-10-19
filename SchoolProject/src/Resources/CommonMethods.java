@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 import static DataBase.ConnectionToDB.connectionToDb;
+import static Resources.Constants.PROD_PRODUCT_DESCRIPTION;
+import static Resources.Constants.PROD_PRODUCT_NAME;
 
 public class CommonMethods {
     public static void ClearScreen() {
@@ -21,8 +22,8 @@ public class CommonMethods {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         while (rs.next()) {
-            String nameProd = rs.getString("product_name");
-            String descriptionProd = rs.getString("product_description");
+            String nameProd = rs.getString(PROD_PRODUCT_NAME);
+            String descriptionProd = rs.getString(PROD_PRODUCT_DESCRIPTION);
             Float porPrice = rs.getFloat("product_price");
 
             // print the results

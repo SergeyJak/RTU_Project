@@ -53,14 +53,16 @@ public class CommonMethods {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         while (rs.next()) {
-            int orderId = rs.getInt("order_id");
-            int productId = rs.getInt("user_id");
-            String productCount = rs.getString("count");
-            String totalPrice = rs.getString("total_price");
-            String productDelivery = rs.getString("delivery");
-            String status = rs.getString("status");
+            int orderId = rs.getInt("order.order_id");
+            int productId = rs.getInt("order.user_id");
+            String productCount = rs.getString("order.count");
+            String totalPrice = rs.getString("order.total_price");
+            String productDelivery = rs.getString("order.delivery");
+            String status = rs.getString("order.status");
+            String productName = rs.getString("products.product_name");
+            String productModel = rs.getString("products.product_description");
 
-            System.out.format("Order ID: %s\t Product ID: %s\t Count: %s\t EUR: %s\t Delivery: %s\t Status: %s\n", orderId, productId, productCount, totalPrice, productDelivery, status);
+            System.out.format("ID: %s\t\t Product Model: %s\t %s\t Count: %s\t EUR: %s\t Delivery: %s\t Status: %s\n", orderId, productName, productModel, productCount, totalPrice, productDelivery, status);
         }
     }
 }

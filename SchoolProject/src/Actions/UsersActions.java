@@ -83,7 +83,8 @@ public class UsersActions {
     private static void seeAllOrders(int userId) throws SQLException, IOException, ClassNotFoundException {
         ClearScreen();
 
-        String query = "SELECT * FROM main.order where user_id = " + userId;
+//        String query = "SELECT * FROM main.order where user_id = " + userId;
+        String query = "SELECT * FROM main.products join main.order ON order.product_id = products.product_id where user_id = " + userId;
         returnOrderDescriptionByQuery(query);
 
     }

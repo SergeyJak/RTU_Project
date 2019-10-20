@@ -37,15 +37,15 @@ public class Constants {
     public static final String WRONG_PRODUCT_CHOICE = "Wrong Product name or not exist in warehouse";
 
     //Info messages
-    public static final String INF_MSG_USER_MAIN = "Products list   -   products\nMake order   -   new order\nExit - exit";
+    public static final String INF_MSG_USER_MAIN = "Products list   -   products\nMake order   -   new\nSee all your order   -   see\nExit - exit";
     public static final String INF_MSG_ORDER_CHOICE = "Please enter order, or choose \"exit\" to return in main menu:";
     public static final String INF_MSG_PRODUCT = "All information about your product: ";
 
     //actions strings
     public static final String EXIT = "exit";
-    public static final String NEW_ORD = "new order";
+    public static final String NEW_ORD = "new";
     public static final String NEW_SERV = "new services";
-    public static final String SEE_ORD = "see orders";
+    public static final String SEE_ORD = "see";
     public static final String SEE_SERV = "see services";
     public static final String FIND = "find";
     public static final String PRODUCTS = "products";

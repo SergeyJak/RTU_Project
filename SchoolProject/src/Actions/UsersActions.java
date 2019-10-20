@@ -58,6 +58,8 @@ public class UsersActions {
         returnProductsDescriptionByQuery(query);
     }
     private static void addNewOrder(int userId) throws SQLException, IOException, ClassNotFoundException { // new order method
+        ClearScreen();
+
         Scanner in = new Scanner(System.in);
         System.out.println(INF_MSG_ORDER_CHOICE);
         System.out.println(ENTER_PROD_NAME);
@@ -78,7 +80,11 @@ public class UsersActions {
     private static void addNewServiceRequest(int userId){
 
     }
-    private static void seeAllOrders(int userId){
+    private static void seeAllOrders(int userId) throws SQLException, IOException, ClassNotFoundException {
+        ClearScreen();
+
+        String query = "SELECT * FROM main.order where user_id = " + userId;
+        returnProductsDescriptionByQuery(query);
 
     }
     private static void seeAllServices(int userId){

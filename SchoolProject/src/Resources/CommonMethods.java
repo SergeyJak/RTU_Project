@@ -27,7 +27,7 @@ public class CommonMethods {
             Float porPrice = rs.getFloat("product_price");
 
             // print the results
-            System.out.format("Name: %s\t\t Model: %s\t EUR %s\n", nameProd, descriptionProd, porPrice);
+            System.out.format("Name: %s\t Model: %s\t EUR %s\n", nameProd, descriptionProd, porPrice);
         }
 
     }
@@ -48,6 +48,20 @@ public class CommonMethods {
         String query = "UPDATE main.products SET product_count = " + productCount + " WHERE product_id = " + productId + ";";
 
         connectionToDb().prepareStatement(query).execute();
+    }
+    public static void returnOrderDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        ResultSet rs = connectionToDb().createStatement().executeQuery(query);
+
+        while (rs.next()) {
+            int orderId = rs.getInt("order_id");
+            int productId = rs.getInt("user_id");
+            String productCount = rs.getString("count");
+            String totalPrice = rs.getString("total_price");
+            String productDelivery = rs.getString("delivery");
+            String status = rs.getString("status");
+
+            System.out.format("Order ID: %s\t Product ID: %s\t Count: %s\t EUR: %s\t Delivery: %s\t Status: %s\n", orderId, productId, productCount, totalPrice, productDelivery, status);
+        }
     }
 }
 

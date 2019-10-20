@@ -84,7 +84,7 @@ public class UsersActions {
         ClearScreen();
 
         String query = "SELECT * FROM main.order where user_id = " + userId;
-        returnProductsDescriptionByQuery(query);
+        returnOrderDescriptionByQuery(query);
 
     }
     private static void seeAllServices(int userId){

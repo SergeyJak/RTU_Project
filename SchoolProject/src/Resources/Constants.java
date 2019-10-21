@@ -40,7 +40,7 @@ public class Constants {
     public static final String INF_MSG_USER_MAIN = "Products list   -   products\nMake order   -   new\nRequest service   -   service\nSee all your order   -   see\nSee all your services   -   see services\nExit - exit";
     public static final String INF_MSG_ORDER_CHOICE = "Please enter order, or choose \"exit\" to return in main menu:";
     public static final String INF_MSG_PRODUCT = "All information about your product: ";
-
+    public static final String ADMIN_CHOICE = "\nView orders - [vo]\nView services - [vs]\nEdit orders- [eo]\nEdit services- [es]\nSearch- [srch]\nExit -[EXIT]";
     //actions strings
     public static final String EXIT = "exit";
     public static final String NEW_ORD = "new";

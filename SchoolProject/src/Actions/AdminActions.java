@@ -24,31 +24,32 @@ class AdminActions {
 
         do {
             System.out.print(DO_CHOICE);
+            System.out.print(ADMIN_CHOICE);
             mainChoice = in.nextLine();
 
             switch (mainChoice) {
-                case "view orders":
+                case "vo":
                     viewAllOrders();
                     break;
-                case "view services":
+                case "vs":
                     viewAllServices();
                     break;
-                case "edit orders":
+                case "eo":
                     //editOrder();
                     break;
-                case "edit services":
+                case "es":
                     editService();
                     break;
-                case "search":
+                case "srch":
                     break;
-                case EXIT:
+                case "EXIT":
                     System.out.println(RETURN_TO_LOGIN);
                     break;
                 default:
-                    System.out.println(WRONG_CHOICE);
+                    System.out.println(EXIT);
                     break;
             }
-        } while (!mainChoice.equals(EXIT));
+        } while (!mainChoice.equals(6));
 
         connectionToDb().close();
 

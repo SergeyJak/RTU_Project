@@ -77,23 +77,34 @@ public class UsersActions {
 
         checkProductsDescriptionByQuery(checkQuery, userId);
     }
-    private static void addNewServiceRequest(int userId){
+    private static void addNewServiceRequest(int userId) throws SQLException, IOException, ClassNotFoundException {
+        Scanner in = new Scanner(System.in);
+        ClearScreen();
 
+        System.out.println("Please enter <<<Product Name>>>: ");
+        String productName = in.nextLine();
+        System.out.println("Enter broken <<<Detail Name>>>: ");
+        String brokenDetail = in.nextLine();
+        System.out.println("Enter additional description: ");
+        String description = in.nextLine();
+
+        insertServiceLine(userId, productName, brokenDetail, description);
+
+        System.out.println(ORDER_ACCEPTED);
     }
     private static void seeAllOrders(int userId) throws SQLException, IOException, ClassNotFoundException {
         ClearScreen();
 
-//        String query = "SELECT * FROM main.order where user_id = " + userId;
         String query = "SELECT * FROM main.products join main.order ON order.product_id = products.product_id where user_id = " + userId;
         returnOrderDescriptionByQuery(query);
+    }
+    private static void seeAllServices(int userId) throws SQLException, IOException, ClassNotFoundException {
+        ClearScreen();
+
+        String query = "SELECT * FROM main.service where user_id = " + userId;
+        returnServicesDescriptionByQuery(query);
 
     }
-    private static void seeAllServices(int userId){
-
-    }
-
-
-
     private static void checkProductsDescriptionByQuery(String query, int userId) throws SQLException, ClassNotFoundException, IOException {
         int productId;
         String nameProd;

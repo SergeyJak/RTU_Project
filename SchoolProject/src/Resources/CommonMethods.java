@@ -93,7 +93,48 @@ public class CommonMethods {
             System.out.format("ID: %s\t\t Product Name: %s\t Request Date: %s\t Detail: %s\t Total Price: %s €\t Status: %s\n", orderId, productName, data, brokenDetail, servicePrice, status);
         }
     }
-}
+    
+    public static void returnServiceListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
+        System.out.println("\nNr   User     Product         Date      Detail      Description               Amount Status");
+        System.out.println("------------------------------------------------------------------------------------------");
+        while (rs.next()) {
+            String sID = rs.getString(SERVICE_ID);
+            String uName = rs.getString(USER_NAME);
+            String sName = rs.getString(SERVICE_PR_NAME);
+            String sDate = rs.getString(SERVICE_DATE);    
+            String sDetail = rs.getString(SERVICE_DETAIL);
+            String sDescr = rs.getString(SERVICE_DESCRITPION);
+            Float sPrice = rs.getFloat("price");
+            String sStatus = rs.getString(SERVICE_STATUS);
+            
+            // print the results
+            System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",sID,uName,sName,sDate,sDetail,sDescr,sPrice,sStatus);
+        }
+        System.out.println("------------------------------------------------------------------------------------------");
+    }
+    
+    public static void returnOrderListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        ResultSet rs = connectionToDb().createStatement().executeQuery(query);
+        
+		System.out.println("\nNr   User    Product    Description          Count  Total    Delivery   Date      Status");
+        System.out.println("------------------------------------------------------------------------------------------");
+        while (rs.next()) {
+            String oID = rs.getString(ORDER_ID);
+            String uName = rs.getString(USER_NAME);
+            String pName = rs.getString(PROD_PRODUCT_NAME);
+            String pDescr = rs.getString(PROD_PRODUCT_DESCRIPTION);
+            Integer oCount = rs.getInt("count");
+            Float oTotal = rs.getFloat("total_price");
+            String oDelivery = rs.getString(ORDER_DELIVERY);
+            String oDate = rs.getString(ORDER_DATE);        
+            String oStatus = rs.getString(ORDER_STATUS);    
+            
+            // print the results
+            System.out.format("%-4s %-8s %-10s %-20s %-5s %-8.2f %-10s %-10s %-10s\n", oID,uName,pName,pDescr,oCount,oTotal,oDelivery,oDate,oStatus);
+        }
+    }
+}
 
 

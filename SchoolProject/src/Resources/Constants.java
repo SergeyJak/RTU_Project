@@ -57,6 +57,26 @@ public class Constants {
     public static final String PROD_PRODUCT_PRICE = "product_price";
     public static final String PROD_PRODUCT_COUNT = "product_count";
 
+    //user table
+	public static final String USER_NAME = "username";
 
-
+    //order table
+    public static final String ORDER_ID = "order_id";
+    public static final String ORDER_COUNT = "count";
+    public static final String ORDER_TOTAL = "total_price";
+    public static final String ORDER_DELIVERY = "delivery";
+    public static final String ORDER_DESCRIPTION = "description";
+    public static final String ORDER_DATE = "date";
+    public static final String ORDER_STATUS = "status";
+    
+    //service table
+    public static final String SERVICE_ID = "service_id";
+    public static final String SERVICE_PR_NAME = "product_name";
+    public static final String SERVICE_DATE = "date";
+    public static final String SERVICE_DETAIL = "broken_detail";
+    public static final String SERVICE_DESCRITPION = "description";
+    public static final String SERVICE_STATUS = "status";
+    public static final String SERVICE_PRICE = "price";
+    
+    
 }

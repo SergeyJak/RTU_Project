@@ -35,12 +35,13 @@ class AdminActions {
                     viewAllServices();
                     break;
                 case "eo":
-                    //editOrder();
+                    editOrder();
                     break;
                 case "es":
                     editService();
                     break;
                 case "srch":
+                	search();
                     break;
                 case "EXIT":
                     System.out.println(RETURN_TO_LOGIN);
@@ -49,7 +50,7 @@ class AdminActions {
                     System.out.println(EXIT);
                     break;
             }
-        } while (!mainChoice.equals(6));
+        } while (!mainChoice.equals(EXIT));
 
         connectionToDb().close();
 
@@ -76,16 +77,28 @@ class AdminActions {
         returnServiceListByQuery(query);
     }
 
-	//private static void editOrder() throws ClassNotFoundException, SQLException, IOException{
-	//	Scanner inn = new Scanner(System.in);
-	//	System.out.println("Choose order which status should be changed:");
-	//	int order_id = inn.nextInt();
-	//	System.out.println("Choose new status:"); 
-	//	int statusNew = inn.nextInt();
-	//changeStatusForOrder(order_id,statusNew);
-    //}
+	private static void editOrder() throws ClassNotFoundException, SQLException, IOException{
+		Scanner inn = new Scanner(System.in);
+		System.out.println("Choose order which status should be changed:");
+		String order_id = inn.nextLine();
+		String query = "Select \n" +
+                 "O.order_id,U.username, P.product_name, P.product_description,O.count,O.total_price,O.delivery, O.date, O.status\n" +
+                 "FROM main.products P\n" +
+                 "INNER JOIN main.order O ON P.product_id=O.product_id\n" +
+                 "INNER JOIN main.user U ON U.user_id=O.user_id\n"+
+                 "where O.order_id = " + order_id + "";
+		returnOrderListByQuery(query);		
+		System.out.println("\nChoose new status:"); 
+		String statusNew = inn.nextLine();
+		changeStatusForOrder(order_id,statusNew);
+    }
     
     private static void editService(){
+
+    }
+    
+    private static void search() {
+    	// Valery part
 
     }
 }

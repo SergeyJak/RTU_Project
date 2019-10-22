@@ -137,6 +137,12 @@ public class CommonMethods {
             // print the results
             System.out.format("%-4s %-8s %-10s %-20s %-5s %-8.2f %-10s %-10s %-10s\n", oID,uName,pName,pDescr,oCount,oTotal,oDelivery,oDate,oStatus);
         }
+    } 
+    
+    public static void changeStatusForOrder(int order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
+        String query = "UPDATE main.order SET status = " + statusNew + " WHERE order_id = " + order_id + ";";
+        connectionToDb().prepareStatement(query).execute();
+        
     }
 }
 

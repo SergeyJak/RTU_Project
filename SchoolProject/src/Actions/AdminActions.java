@@ -90,7 +90,7 @@ class AdminActions {
 		returnOrderListByQuery(query);		
 		System.out.println("\nChoose new status:"); 
 		String statusNew = inn.nextLine();
-		changeStatusForOrder(order_id,statusNew);
+//		changeStatusForOrder(order_id,statusNew);
     }
     
     private static void editService(){

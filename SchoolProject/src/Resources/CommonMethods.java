@@ -128,8 +128,8 @@ public class CommonMethods {
             String uName = rs.getString(USER_NAME);
             String pName = rs.getString(PROD_PRODUCT_NAME);
             String pDescr = rs.getString(PROD_PRODUCT_DESCRIPTION);
-            Integer oCount = rs.getInt("count");
-            Float oTotal = rs.getFloat("total_price");
+            String oCount = rs.getString(ORDER_COUNT);
+            Float oTotal = rs.getFloat(ORDER_TOTAL);
             String oDelivery = rs.getString(ORDER_DELIVERY);
             String oDate = rs.getString(ORDER_DATE);        
             String oStatus = rs.getString(ORDER_STATUS);    

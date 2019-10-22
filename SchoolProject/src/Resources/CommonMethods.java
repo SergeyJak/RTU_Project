@@ -82,6 +82,9 @@ public class CommonMethods {
     public static void returnServicesDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
+        System.out.println("\nID   Product Name     Request Date      Detail      Total Price      Status");
+        System.out.println("------------------------------------------------------------------------------------------");
+
         while (rs.next()) {
             int orderId = rs.getInt("service_id");
             String productName = rs.getString("product_name");
@@ -90,7 +93,7 @@ public class CommonMethods {
             String status = rs.getString("status");
             String servicePrice = rs.getString("price");
 
-            System.out.format("ID: %s\t\t Product Name: %s\t Request Date: %s\t Detail: %s\t Total Price: %s €\t Status: %s\n", orderId, productName, data, brokenDetail, servicePrice, status);
+            System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", orderId, productName, data, brokenDetail, servicePrice, status);
         }
     }
     

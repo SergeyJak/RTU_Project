@@ -9,7 +9,7 @@ import static DataBase.ConnectionToDB.connectionToDb;
 import static Resources.CommonMethods.*;
 import static Resources.Constants.*;
 
-public class UsersActions {
+class UsersActions {
     static void userMainChoice(int userId) throws SQLException, ClassNotFoundException, IOException {
         String mainChoice;
 

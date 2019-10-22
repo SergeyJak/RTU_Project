@@ -100,8 +100,8 @@ public class CommonMethods {
     public static void returnServiceListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
-        System.out.println("\nNr   User     Product         Date      Detail      Description               Amount Status");
-        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
+        System.out.println("\n---------------------------------------------------------------------------------------------");
         while (rs.next()) {
             String sID = rs.getString(SERVICE_ID);
             String uName = rs.getString(USER_NAME);
@@ -115,14 +115,15 @@ public class CommonMethods {
             // print the results
             System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",sID,uName,sName,sDate,sDetail,sDescr,sPrice,sStatus);
         }
-        System.out.println("------------------------------------------------------------------------------------------");
+        System.out.println("---------------------------------------------------------------------------------------------");
+        rs.close();
     }
     
     public static void returnOrderListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
-        
-		System.out.println("\nNr   User    Product    Description          Count  Total    Delivery   Date      Status");
-        System.out.println("------------------------------------------------------------------------------------------");
+        if (rs.next()) {
+        System.out.format("\n%-4s %-8s %-10s %-20s %-5s %-8.2s %-10s %-10s %-10s", "Nr" ,"User", "Product","Description","Count","Total","Delivery","Date","Status");
+        System.out.println("\n---------------------------------------------------------------------------------------------------");
         while (rs.next()) {
             String oID = rs.getString(ORDER_ID);
             String uName = rs.getString(USER_NAME);
@@ -137,12 +138,16 @@ public class CommonMethods {
             // print the results
             System.out.format("%-4s %-8s %-10s %-20s %-5s %-8.2f %-10s %-10s %-10s\n", oID,uName,pName,pDescr,oCount,oTotal,oDelivery,oDate,oStatus);
         }
+        System.out.println("---------------------------------------------------------------------------------------------------");
+        }else 
+            System.out.println(WRONG_CHOICE);//need to change logic 
+        rs.close();
     } 
-    
-    public static void changeStatusForOrder(int order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
-        String query = "UPDATE main.order SET status = " + statusNew + " WHERE order_id = " + order_id + ";";
+
+    public static void changeStatusForOrder(String order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
+        String query = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + ";";
         connectionToDb().prepareStatement(query).execute();
-        
+		System.out.format("Status for order %2s is changed to %s\n",order_id,statusNew);
     }
 }
 

@@ -13,14 +13,14 @@ import static Resources.Constants.*;
 //import static Resources.Constants.WRONG_CHOICE;
 
 class AdminActions {
-    static void adminChoice() throws SQLException, IOException, ClassNotFoundException {
+    static void adminChoice(String userLogin) throws SQLException, IOException, ClassNotFoundException {
         String mainChoice;
 
         Scanner in = new Scanner(System.in);
 
         connectionToDb();
 
-        System.out.println("empty"); //Information - main page
+        System.out.format("Welcome %s\n",userLogin); //Information - main page
 
         do {
             System.out.print(DO_CHOICE);
@@ -47,7 +47,7 @@ class AdminActions {
                     System.out.println(RETURN_TO_LOGIN);
                     break;
                 default:
-                    System.out.println(EXIT);
+                    System.out.println(WRONG_CHOICE);
                     break;
             }
         } while (!mainChoice.equals(EXIT));
@@ -86,14 +86,15 @@ class AdminActions {
                  "FROM main.products P\n" +
                  "INNER JOIN main.order O ON P.product_id=O.product_id\n" +
                  "INNER JOIN main.user U ON U.user_id=O.user_id\n"+
-                 "where O.order_id = " + order_id + "";
+                 "where O.order_id = " + order_id + ";";
+		
 		returnOrderListByQuery(query);		
 		System.out.println("\nChoose new status:"); 
 		String statusNew = inn.nextLine();
-//		changeStatusForOrder(order_id,statusNew);
+		changeStatusForOrder(order_id,statusNew); 
     }
     
-    private static void editService(){
+    private static void editService() throws ClassNotFoundException, SQLException, IOException{
 
     }
     

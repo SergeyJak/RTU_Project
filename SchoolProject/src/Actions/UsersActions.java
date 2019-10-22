@@ -81,11 +81,11 @@ class UsersActions {
         Scanner in = new Scanner(System.in);
         ClearScreen();
 
-        System.out.println("Please enter <<<Product Name>>>: ");
+        System.out.print(ENTER_PRODUCT_NAME);
         String productName = in.nextLine();
-        System.out.println("Enter broken <<<Detail Name>>>: ");
+        System.out.print(ENTER_BROKEN_DETAIL);
         String brokenDetail = in.nextLine();
-        System.out.println("Enter additional description: ");
+        System.out.print(ENTER_PRODUCT_DESCRIPTION);
         String description = in.nextLine();
 
         insertServiceLine(userId, productName, brokenDetail, description);

@@ -54,13 +54,13 @@ public class CommonMethods {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         while (rs.next()) {
-            int orderId = rs.getInt("order.order_id");
-            String productCount = rs.getString("order.count");
-            String totalPrice = rs.getString("order.total_price");
-            String productDelivery = rs.getString("order.delivery");
-            String status = rs.getString("order.status");
-            String productName = rs.getString("products.product_name");
-            String productModel = rs.getString("products.product_description");
+            int orderId = rs.getInt(ORDER_ID);
+            String productCount = rs.getString(ORDER_COUNT);
+            String totalPrice = rs.getString(ORDER_TOTAL);
+            String productDelivery = rs.getString(ORDER_DELIVERY);
+            String status = rs.getString(ORDER_STATUS);
+            String productName = rs.getString(PROD_PRODUCT_COUNT);
+            String productModel = rs.getString(PROD_PRODUCT_DESCRIPTION);
 
             System.out.format("ID: %s\t\t Product Model: %s\t %s\t Count: %s\t Price: %s €\t Delivery: %s\t Status: %s\n", orderId, productName, productModel, productCount, totalPrice, productDelivery, status);
         }
@@ -82,16 +82,16 @@ public class CommonMethods {
     public static void returnServicesDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
-        System.out.println("\nID   Product Name     Request Date      Detail      Total Price      Status");
+        System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", "ID", "Product Name", "Request Date", "Detail", "Total Price", "Status");
         System.out.println("------------------------------------------------------------------------------------------");
 
         while (rs.next()) {
-            int orderId = rs.getInt("service_id");
-            String productName = rs.getString("product_name");
-            Date data = rs.getDate("date");
-            String brokenDetail = rs.getString("broken_detail");
-            String status = rs.getString("status");
-            String servicePrice = rs.getString("price");
+            int orderId = rs.getInt(SERVICE_ID);
+            String productName = rs.getString(SERVICE_PR_NAME);
+            Date data = rs.getDate(SERVICE_DATE);
+            String brokenDetail = rs.getString(SERVICE_DETAIL);
+            String status = rs.getString(SERVICE_STATUS);
+            String servicePrice = rs.getString(SERVICE_PRICE);
 
             System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", orderId, productName, data, brokenDetail, servicePrice, status);
         }
@@ -109,7 +109,7 @@ public class CommonMethods {
             String sDate = rs.getString(SERVICE_DATE);    
             String sDetail = rs.getString(SERVICE_DETAIL);
             String sDescr = rs.getString(SERVICE_DESCRITPION);
-            Float sPrice = rs.getFloat("price");
+            Float sPrice = rs.getFloat(SERVICE_PRICE);
             String sStatus = rs.getString(SERVICE_STATUS);
             
             // print the results

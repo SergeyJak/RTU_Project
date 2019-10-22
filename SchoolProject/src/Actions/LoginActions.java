@@ -44,7 +44,7 @@ public class LoginActions {
             //Password verification
             if (userTable.getString(Constants.USER_COLUMN).equals(userLogin)){
 
-                System.out.print(Constants.PLEASE_ENTER_PASS);
+                System.out.print(Constants.ENTER_PASS);
                 password = in.nextLine();
                 if (password.equals(userTable.getString(Constants.PASSWORD_COLUMN))){
                     if (Constants.ADMIN_PERMISSIONS == userTable.getInt(Constants.LEVEL_COLUMN)){

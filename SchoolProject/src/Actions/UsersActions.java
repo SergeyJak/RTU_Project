@@ -95,7 +95,9 @@ class UsersActions {
     private static void seeAllOrders(int userId) throws SQLException, IOException, ClassNotFoundException {
         ClearScreen();
 
-        String query = "SELECT * FROM main.products join main.order ON order.product_id = products.product_id where user_id = " + userId;
+        String query = "SELECT " +
+                "O.order_id O.order_count, O.total_price, O.delivery O.status, P.product_count, P.product_description" +
+                " FROM main.products join main.order ON O.product_id = P.product_id where O.user_id = " + userId;
         returnOrderDescriptionByQuery(query);
     }
     private static void seeAllServices(int userId) throws SQLException, IOException, ClassNotFoundException {

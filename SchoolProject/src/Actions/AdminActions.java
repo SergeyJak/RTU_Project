@@ -12,10 +12,9 @@ import static Resources.Constants.*;
 //import static Resources.Constants.RETURN_TO_LOGIN;
 //import static Resources.Constants.WRONG_CHOICE;
 
-class AdminActions {
-    static void adminChoice(String userLogin) throws SQLException, IOException, ClassNotFoundException {
+public class AdminActions {
+    public static void adminChoice(String userLogin) throws SQLException, IOException, ClassNotFoundException {
         String mainChoice;
-
         Scanner in = new Scanner(System.in);
 
         connectionToDb();
@@ -38,7 +37,7 @@ class AdminActions {
                     editOrder();
                     break;
                 case "es":
-                    editService();
+                    //editService();
                     break;
                 case "srch":
                 	search();
@@ -77,7 +76,7 @@ class AdminActions {
         returnServiceListByQuery(query);
     }
 
-	private static void editOrder() throws ClassNotFoundException, SQLException, IOException{
+	public static void editOrder() throws ClassNotFoundException, SQLException, IOException{
 		Scanner inn = new Scanner(System.in);
 		System.out.println("Choose order which status should be changed:");
 		String order_id = inn.nextLine();
@@ -92,10 +91,6 @@ class AdminActions {
 		System.out.println("\nChoose new status:"); 
 		String statusNew = inn.nextLine();
 		changeStatusForOrder(order_id,statusNew); 
-    }
-    
-    private static void editService() throws ClassNotFoundException, SQLException, IOException{
-
     }
     
     private static void search() {

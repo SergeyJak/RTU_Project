@@ -50,6 +50,7 @@ public class LoginActions {
                     if (ADMIN_PERMISSIONS == userTable.getInt(LEVEL_COLUMN)){
 
                         AdminActions.adminChoice();
+                        AdminActions.adminChoice(userLogin);
 
                     } else if (USER_PERMISSIONS == userTable.getInt(LEVEL_COLUMN)){
 

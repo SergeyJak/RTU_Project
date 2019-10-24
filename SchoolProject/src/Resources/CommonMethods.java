@@ -9,6 +9,7 @@ import java.util.Calendar;
 
 import static DataBase.ConnectionToDB.connectionToDb;
 import static Resources.Constants.*;
+import static Actions.AdminActions.*;
 
 public class CommonMethods {
     public static void ClearScreen() {
@@ -99,10 +100,13 @@ public class CommonMethods {
     
     public static void returnServiceListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
-
-        System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
+        if (rs.next() == false) {
+        	System.out.println(WRONG_ORDER_SERVICE_ID);
+            editService();
+        }
+        System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6s %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------");
-        while (rs.next()) {
+        do{
             String sID = rs.getString(SERVICE_ID);
             String uName = rs.getString(USER_NAME);
             String sName = rs.getString(SERVICE_PR_NAME);
@@ -114,17 +118,26 @@ public class CommonMethods {
             
             // print the results
             System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",sID,uName,sName,sDate,sDetail,sDescr,sPrice,sStatus);
-        }
+        } while (rs.next());
         System.out.println("---------------------------------------------------------------------------------------------");
-        rs.close();
+        //rs.close();
+    }
+ 
+    public static void changeStatusForService(String service_id,String statusNew,String priceNew) throws SQLException, ClassNotFoundException, IOException {
+    	String query3 = "UPDATE main.service SET status = (" + " \"" + statusNew + "\"" + "), price = (" + " \"" + priceNew + "\"" + ") WHERE service_id = " + service_id + ";";
+        connectionToDb().prepareStatement(query3).execute();
+		System.out.format("Status for order %2s is changed to %s and new price is %s\n",service_id,statusNew,priceNew);
     }
     
     public static void returnOrderListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
-        if (rs.next()) {
+        if (rs.next() == false) {
+        	System.out.println(WRONG_ORDER_SERVICE_ID);
+            editOrder();
+        }
         System.out.format("\n%-4s %-8s %-10s %-20s %-5s %-8.2s %-10s %-10s %-10s", "Nr" ,"User", "Product","Description","Count","Total","Delivery","Date","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------------");
-        while (rs.next()) {
+        do{
             String oID = rs.getString(ORDER_ID);
             String uName = rs.getString(USER_NAME);
             String pName = rs.getString(PROD_PRODUCT_NAME);
@@ -137,18 +150,22 @@ public class CommonMethods {
             
             // print the results
             System.out.format("%-4s %-8s %-10s %-20s %-5s %-8.2f %-10s %-10s %-10s\n", oID,uName,pName,pDescr,oCount,oTotal,oDelivery,oDate,oStatus);
-        }
+        }while (rs.next());
         System.out.println("---------------------------------------------------------------------------------------------------");
-        }else 
-            System.out.println(WRONG_CHOICE);//need to change logic 
         rs.close();
     } 
 
-    public static void changeStatusForOrder(String order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
-        String query = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + ";";
-        connectionToDb().prepareStatement(query).execute();
+	public static void changeStatusForOrder(String order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
+        String query2 = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + "";
+        connectionToDb().prepareStatement(query2).execute();
 		System.out.format("Status for order %2s is changed to %s\n",order_id,statusNew);
     }
+	
+	public static boolean isNumeric(String strNum) {
+	    return strNum.matches("\\d+");
+	}
+	
+	
 }
 
 

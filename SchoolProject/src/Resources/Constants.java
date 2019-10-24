@@ -36,7 +36,7 @@ public class Constants {
     public static final String DELIVERY_CHOICE = "Choose delivery(shop | mail): ";
     public static final String ORDER_ACCEPTED = "<<< ORDER ACCEPTED >>>";
     public static final String WRONG_PRODUCT_CHOICE = "Wrong Product name or not exist in warehouse";
-    public static final String WRONG_ORDER_ID ="Order id doesn't exist, please try again";
+    public static final String WRONG_ORDER_SERVICE_ID ="Id doesn't exist, please try again";
 
     //Info messages
     public static final String INF_MSG_USER_MAIN = "Products list   -   products\nMake order   -   new\nRequest service   -   service\nSee all your order   -   see\nSee all your services   -   see services\nExit - exit";

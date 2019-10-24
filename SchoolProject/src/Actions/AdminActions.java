@@ -37,7 +37,7 @@ public class AdminActions {
                     editOrder();
                     break;
                 case "es":
-                    //editService();
+                    editService();
                     break;
                 case "srch":
                 	search();
@@ -80,6 +80,8 @@ public class AdminActions {
 		Scanner inn = new Scanner(System.in);
 		System.out.println("Choose order which status should be changed:");
 		String order_id = inn.nextLine();
+		
+		if (isNumeric(order_id)){
 		String query = "Select \n" +
                  "O.order_id,U.username, P.product_name, P.product_description,O.count,O.total_price,O.delivery, O.date, O.status\n" +
                  "FROM main.products P\n" +
@@ -90,11 +92,43 @@ public class AdminActions {
 		returnOrderListByQuery(query);		
 		System.out.println("\nChoose new status:"); 
 		String statusNew = inn.nextLine();
-		changeStatusForOrder(order_id,statusNew); 
+		changeStatusForOrder(order_id,statusNew);
+		}
+		else {
+			System.out.print("Wrong input\n");
+			editOrder();
+		}
     }
+    
+    public static void editService() throws ClassNotFoundException, SQLException, IOException{
+    	Scanner inn = new Scanner(System.in);
+		System.out.println("Choose service which status should be changed:");
+		String service_id = inn.nextLine();
+		
+		if (isNumeric(service_id)){
+        String query = "Select \n" + 
+        		"S.service_id,U.username, S.product_name,S.date, S.description,S.broken_detail, S.status, S.price\n" + 
+        		"FROM main.user U\n" + 
+        		"INNER JOIN main.service S ON U.user_id=S.user_id\n" + 
+                "where S.service_id = " + service_id + ";";
+		
+        returnServiceListByQuery(query);		
+		System.out.println("\nChoose new status:"); 
+		String statusNew = inn.nextLine();
+		System.out.println("\nChoose new price:"); 
+		String priceNew = inn.nextLine();
+		changeStatusForService(service_id,statusNew,priceNew); 
+		}
+		else {
+			System.out.println("Wrong input\n");
+			editService();
+			}
+		}
+  
     
     private static void search() {
     	// Valery part
 
+    	
     }
 }

@@ -7,13 +7,10 @@ import java.util.Scanner;
 import static DataBase.ConnectionToDB.connectionToDb;
 import static Resources.CommonMethods.*;
 import static Resources.Constants.*;
-//import static Resources.Constants.DO_CHOICE;
-//import static Resources.Constants.EXIT;
-//import static Resources.Constants.RETURN_TO_LOGIN;
-//import static Resources.Constants.WRONG_CHOICE;
+
 
 public class AdminActions {
-    public static void adminChoice(String userLogin) throws SQLException, IOException, ClassNotFoundException {
+    static void adminChoice(String userLogin) throws SQLException, IOException, ClassNotFoundException {
         String mainChoice;
         Scanner in = new Scanner(System.in);
 
@@ -42,7 +39,7 @@ public class AdminActions {
                 case "srch":
                 	search();
                     break;
-                case "EXIT":
+                case EXIT:
                     System.out.println(RETURN_TO_LOGIN);
                     break;
                 default:

@@ -10,13 +10,6 @@ public class Constants {
     public static final String YES = "yes";
     public static final String NO = "no";
 
-
-    //db constants
-    public static final String USER_COLUMN = "username";
-    public static final String PASSWORD_COLUMN = "password";
-    public static final String LEVEL_COLUMN = "user_level";
-    public static final String USER_ID_COLUMN = "user_id";
-
     //dialog constants
     public static final String ENTER_LOGIN = "Enter <<<Login>>>: ";
     public static final String ENTER_PROD_NAME = "Enter <<<Product>>>: ";
@@ -36,7 +29,7 @@ public class Constants {
     public static final String DELIVERY_CHOICE = "Choose delivery(shop | mail): ";
     public static final String ORDER_ACCEPTED = "<<< ORDER ACCEPTED >>>";
     public static final String WRONG_PRODUCT_CHOICE = "Wrong Product name or not exist in warehouse";
-    public static final String WRONG_ORDER_SERVICE_ID ="Id doesn't exist, please try again";
+    static final String WRONG_ORDER_SERVICE_ID ="Id doesn't exist, please try again";
 
     //Info messages
     public static final String INF_MSG_USER_MAIN = "Products list   -   products\nMake order   -   new\nRequest service   -   service\nSee all your order   -   see\nSee all your services   -   see services\nExit - exit";
@@ -68,25 +61,25 @@ public class Constants {
     public static final String USER_LEVEL = "user_level";
 
     //order table
-    public static final String ORDER_ID = "order_id";
+    static final String ORDER_ID = "order_id";
     public static final String ORDER_USER_ID = "user_id";
     public static final String ORDER_PRODUCT_ID = "product_id";
-    public static final String ORDER_COUNT = "count";
-    public static final String ORDER_TOTAL = "total_price";
-    public static final String ORDER_DELIVERY = "delivery";
+    static final String ORDER_COUNT = "count";
+    static final String ORDER_TOTAL = "total_price";
+    static final String ORDER_DELIVERY = "delivery";
     public static final String ORDER_DESCRIPTION = "description";
-    public static final String ORDER_DATE = "date";
-    public static final String ORDER_STATUS = "status";
+    static final String ORDER_DATE = "date";
+    static final String ORDER_STATUS = "status";
     
     //service table
-    public static final String SERVICE_ID = "service_id";
+    static final String SERVICE_ID = "service_id";
     public static final String SERVICE_USER_ID = "user_id";
-    public static final String SERVICE_PR_NAME = "product_name";
-    public static final String SERVICE_DATE = "date";
-    public static final String SERVICE_DETAIL = "broken_detail";
-    public static final String SERVICE_DESCRITPION = "description";
-    public static final String SERVICE_STATUS = "status";
-    public static final String SERVICE_PRICE = "price";
+    static final String SERVICE_PR_NAME = "product_name";
+    static final String SERVICE_DATE = "date";
+    static final String SERVICE_DETAIL = "broken_detail";
+    static final String SERVICE_DESCRITPION = "description";
+    static final String SERVICE_STATUS = "status";
+    static final String SERVICE_PRICE = "price";
     
     
 }

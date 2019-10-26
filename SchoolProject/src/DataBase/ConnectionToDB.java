@@ -16,9 +16,8 @@ public class ConnectionToDB {
         String port = getProperties("host.port");
         String user = getProperties("db.login");
         String password = getProperties("db.password");
-        String dbname = getProperties("db.name");
 
-        String url = "jdbc:mysql://"+ ip + ":" + port +"/" + dbname +"?useLegacyDatetimeCode=false&serverTimezone=UTC";
+        String url = "jdbc:mysql://"+ ip + ":" + port +"/main?useLegacyDatetimeCode=false&serverTimezone=UTC";
 
 
         Class.forName(myDriver);
@@ -33,8 +32,8 @@ public class ConnectionToDB {
 
         FileInputStream file;
 
-        String path = "C:\\Users\\sergejsj1\\Git_new\\SchoolProject\\src\\main.properties";
-//       String path = "C:\\Users\\Sergey\\GitHub\\RTU_Project\\SchoolProject\\src\\main.properties";
+//        String path = "C:\\Users\\sergejsj1\\Git_new\\SchoolProject\\src\\main.properties";
+       String path = "C:\\Users\\Sergey\\GitHub\\RTU_Project\\SchoolProject\\src\\main.properties";
 //        String path = "main.properties";
 
         file = new FileInputStream(path);

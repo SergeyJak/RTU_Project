@@ -88,7 +88,9 @@ class UsersActions {
         System.out.print(ENTER_PRODUCT_DESCRIPTION);
         String description = in.nextLine();
 
-        insertServiceLine(userId, productName, brokenDetail, description);
+        String query = "insert into main.service (user_id, product_name, date, broken_detail, description) values (?, ?, ?, ?, ?)";
+
+        insertServiceLine(query, userId, productName, brokenDetail, description);
 
         System.out.println(ORDER_ACCEPTED);
     }
@@ -144,11 +146,15 @@ class UsersActions {
                 System.out.println(ENTER_COMMENT);
                 description = in.nextLine();
 
-                insertOrderLine(userId, productId, 1, porPrice, delivery, description);
+                String insertQuery = "insert into main.order (user_id, product_id, count, total_price, delivery, description) values (?, ?, ?, ?, ?, ?)";
+
+                insertOrderLine(insertQuery, userId, productId, 1, porPrice, delivery, description);
 
                 productCount = productCount - 1; //after order accept product count should be less for one count
 
-                updateOrderCount(productCount, productId);
+                String UpdateQuery = "UPDATE main.products SET product_count = " + productCount + " WHERE product_id = " + productId + ";";
+
+                updateOrderCount(UpdateQuery);
 
                 System.out.println(ORDER_ACCEPTED);
             }

@@ -27,7 +27,7 @@ public class LoginActions {
             if (userLogin.equals(EXIT))
                 break;
 
-            ResultSet userTable = connection.executeQuery("select * from main.user where " + USER_COLUMN + " = '" + userLogin + "'");
+            ResultSet userTable = connection.executeQuery("select * from main.user where " + USER_NAME + " = '" + userLogin + "'");
 
 
             passwordVerification(userTable, userLogin, in);
@@ -42,18 +42,18 @@ public class LoginActions {
         while (userTable.next())
 
             //Password verification
-            if (userTable.getString(USER_COLUMN).equals(userLogin)){
+            if (userTable.getString(USER_NAME).equals(userLogin)){
 
                 System.out.print(ENTER_PASS);
                 password = in.nextLine();
-                if (password.equals(userTable.getString(PASSWORD_COLUMN))){
-                    if (ADMIN_PERMISSIONS == userTable.getInt(LEVEL_COLUMN)){
+                if (password.equals(userTable.getString(USER_PASSWORD))){
+                    if (ADMIN_PERMISSIONS == userTable.getInt(USER_LEVEL)){
 
                         AdminActions.adminChoice(userLogin);
 
-                    } else if (USER_PERMISSIONS == userTable.getInt(LEVEL_COLUMN)){
+                    } else if (USER_PERMISSIONS == userTable.getInt(USER_LEVEL)){
 
-                        UsersActions.userMainChoice(userTable.getInt(USER_ID_COLUMN));
+                        UsersActions.userMainChoice(userTable.getInt(USER_ID));
 
                     }else
                         System.out.println(UNEXPECTED_USER_LEVEL);

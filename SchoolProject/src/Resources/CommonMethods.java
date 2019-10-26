@@ -12,6 +12,18 @@ import static Resources.Constants.*;
 import static Actions.AdminActions.*;
 
 public class CommonMethods {
+    private int ID;
+    private String USERNAME;
+    private String NAME;
+    private String STATUS;
+    private Date DATA;
+    private String BROKEN_DETAIL;
+    private float PRICE;
+    private String DESCRIPTION;
+    private String COUNT;
+    private String DELIVERY;
+    private String MODEL;
+
     public static void ClearScreen() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -21,21 +33,22 @@ public class CommonMethods {
     }
 
     public static void returnProductsDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        CommonMethods com = new CommonMethods();
+
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         while (rs.next()) {
-            String nameProd = rs.getString(PROD_PRODUCT_NAME);
-            String descriptionProd = rs.getString(PROD_PRODUCT_DESCRIPTION);
-            Float porPrice = rs.getFloat(PROD_PRODUCT_PRICE);
+            com.NAME = rs.getString(PROD_PRODUCT_NAME);
+            com.DESCRIPTION = rs.getString(PROD_PRODUCT_DESCRIPTION);
+            com.PRICE = rs.getFloat(PROD_PRODUCT_PRICE);
 
             // print the results
-            System.out.format("Name: %s\t Model: %s\t EUR %s\n", nameProd, descriptionProd, porPrice);
+            System.out.format("Name: %s\t Model: %s\t EUR %s\n", com.NAME, com.DESCRIPTION, com.PRICE);
         }
 
     }
 
-    public static void insertOrderLine(int userId, int productId, int productCount, float totalPrice, String prodDelivery, String prodDescription) throws SQLException, IOException, ClassNotFoundException {
-        String query = "insert into main.order (user_id, product_id, count, total_price, delivery, description) values (?, ?, ?, ?, ?, ?)";
+    public static void insertOrderLine(String query, int userId, int productId, int productCount, float totalPrice, String prodDelivery, String prodDescription) throws SQLException, IOException, ClassNotFoundException {
 
         PreparedStatement preparedStmt = connectionToDb().prepareStatement(query);
         preparedStmt.setInt(1, userId);
@@ -46,28 +59,27 @@ public class CommonMethods {
         preparedStmt.setString(6, prodDescription);
         preparedStmt.execute();
     }
-    public static void updateOrderCount(int productCount, int productId) throws SQLException, IOException, ClassNotFoundException {
-        String query = "UPDATE main.products SET product_count = " + productCount + " WHERE product_id = " + productId + ";";
+    public static void updateOrderCount(String query) throws SQLException, IOException, ClassNotFoundException {
 
         connectionToDb().prepareStatement(query).execute();
     }
     public static void returnOrderDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         while (rs.next()) {
-            int orderId = rs.getInt(ORDER_ID);
-            String productCount = rs.getString(ORDER_COUNT);
-            String totalPrice = rs.getString(ORDER_TOTAL);
-            String productDelivery = rs.getString(ORDER_DELIVERY);
-            String status = rs.getString(ORDER_STATUS);
-            String productName = rs.getString(PROD_PRODUCT_COUNT);
-            String productModel = rs.getString(PROD_PRODUCT_DESCRIPTION);
+            com.ID = rs.getInt(ORDER_ID);
+            com.COUNT = rs.getString(ORDER_COUNT);
+            com.PRICE = rs.getFloat(ORDER_TOTAL);
+            com.DELIVERY = rs.getString(ORDER_DELIVERY);
+            com.STATUS = rs.getString(ORDER_STATUS);
+            com.NAME = rs.getString(PROD_PRODUCT_COUNT);
+            com.MODEL = rs.getString(PROD_PRODUCT_DESCRIPTION);
 
-            System.out.format("ID: %s\t\t Product Model: %s\t %s\t Count: %s\t Price: %s €\t Delivery: %s\t Status: %s\n", orderId, productName, productModel, productCount, totalPrice, productDelivery, status);
+            System.out.format("ID: %s\t\t Product Model: %s\t %s\t Count: %s\t Price: %s €\t Delivery: %s\t Status: %s\n", com.ID, com.NAME, com.MODEL, com.COUNT, com.PRICE, com.DELIVERY, com.STATUS);
         }
     }
-    public static void insertServiceLine(int userId, String productName, String brokenDetail, String prodDescription) throws SQLException, IOException, ClassNotFoundException {
-        String query = "insert into main.service (user_id, product_name, date, broken_detail, description) values (?, ?, ?, ?, ?)";
+    public static void insertServiceLine(String query, int userId, String productName, String brokenDetail, String prodDescription) throws SQLException, IOException, ClassNotFoundException {
 
         Calendar calendar = Calendar.getInstance();
         Date startDate = new Date(calendar.getTime().getTime());
@@ -81,75 +93,77 @@ public class CommonMethods {
         preparedStmt.execute();
     }
     public static void returnServicesDescriptionByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
         System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", "ID", "Product Name", "Request Date", "Detail", "Total Price", "Status");
         System.out.println("------------------------------------------------------------------------------------------");
 
         while (rs.next()) {
-            int orderId = rs.getInt(SERVICE_ID);
-            String productName = rs.getString(SERVICE_PR_NAME);
-            Date data = rs.getDate(SERVICE_DATE);
-            String brokenDetail = rs.getString(SERVICE_DETAIL);
-            String status = rs.getString(SERVICE_STATUS);
-            String servicePrice = rs.getString(SERVICE_PRICE);
+            com.ID = rs.getInt(SERVICE_ID);
+            com.NAME = rs.getString(SERVICE_PR_NAME);
+            com.DATA = rs.getDate(SERVICE_DATE);
+            com.BROKEN_DETAIL = rs.getString(SERVICE_DETAIL);
+            com.STATUS = rs.getString(SERVICE_STATUS);
+            com.PRICE = rs.getFloat(SERVICE_PRICE);
 
-            System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", orderId, productName, data, brokenDetail, servicePrice, status);
+            System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", com.ID, com.NAME, com.DATA, com.BROKEN_DETAIL, com.PRICE, com.STATUS);
         }
     }
     
     public static void returnServiceListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
-        if (rs.next() == false) {
+        if (!rs.next()) {
         	System.out.println(WRONG_ORDER_SERVICE_ID);
             editService();
         }
         System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6s %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------");
-        do{
-            String sID = rs.getString(SERVICE_ID);
-            String uName = rs.getString(USER_NAME);
-            String sName = rs.getString(SERVICE_PR_NAME);
-            String sDate = rs.getString(SERVICE_DATE);    
-            String sDetail = rs.getString(SERVICE_DETAIL);
-            String sDescr = rs.getString(SERVICE_DESCRITPION);
-            Float sPrice = rs.getFloat(SERVICE_PRICE);
-            String sStatus = rs.getString(SERVICE_STATUS);
-            
-            // print the results
-            System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",sID,uName,sName,sDate,sDetail,sDescr,sPrice,sStatus);
-        } while (rs.next());
+        while (rs.next()){
+            com.ID = rs.getInt(SERVICE_ID);
+            com.USERNAME = rs.getString(USER_NAME);
+            com.NAME = rs.getString(SERVICE_PR_NAME);
+            com.DATA = rs.getDate(SERVICE_DATE);
+            com.BROKEN_DETAIL = rs.getString(SERVICE_DETAIL);
+            com.DESCRIPTION = rs.getString(SERVICE_DESCRITPION);
+            com.PRICE = rs.getFloat(SERVICE_PRICE);
+            com.STATUS = rs.getString(SERVICE_STATUS);
+
+            System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",com.ID,com.USERNAME,com.NAME,com.DATA,com.BROKEN_DETAIL,com.DESCRIPTION,com.PRICE,com.STATUS);
+        }
         System.out.println("---------------------------------------------------------------------------------------------");
-        //rs.close();
+        rs.close();
     }
  
     public static void changeStatusForService(String service_id,String statusNew,String priceNew) throws SQLException, ClassNotFoundException, IOException {
-    	String query3 = "UPDATE main.service SET status = (" + " \"" + statusNew + "\"" + "), price = (" + " \"" + priceNew + "\"" + ") WHERE service_id = " + service_id + ";";
-        connectionToDb().prepareStatement(query3).execute();
+
+    	String UpdateQuery = "UPDATE main.service SET status = (" + " \"" + statusNew + "\"" + "), price = (" + " \"" + priceNew + "\"" + ") WHERE service_id = " + service_id + ";";
+        connectionToDb().prepareStatement(UpdateQuery).execute();
 		System.out.format("Status for order %2s is changed to %s and new price is %s\n",service_id,statusNew,priceNew);
     }
     
     public static void returnOrderListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
+        CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
-        if (rs.next() == false) {
+        if (!rs.next()) {
         	System.out.println(WRONG_ORDER_SERVICE_ID);
             editOrder();
         }
         System.out.format("\n%-4s %-8s %-10s %-20s %-5s %-8.2s %-10s %-10s %-10s", "Nr" ,"User", "Product","Description","Count","Total","Delivery","Date","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------------");
         do{
-            String oID = rs.getString(ORDER_ID);
-            String uName = rs.getString(USER_NAME);
-            String pName = rs.getString(PROD_PRODUCT_NAME);
-            String pDescr = rs.getString(PROD_PRODUCT_DESCRIPTION);
-            String oCount = rs.getString(ORDER_COUNT);
-            Float oTotal = rs.getFloat(ORDER_TOTAL);
-            String oDelivery = rs.getString(ORDER_DELIVERY);
-            String oDate = rs.getString(ORDER_DATE);        
-            String oStatus = rs.getString(ORDER_STATUS);    
-            
-            // print the results
-            System.out.format("%-4s %-8s %-10s %-20s %-5s %-8.2f %-10s %-10s %-10s\n", oID,uName,pName,pDescr,oCount,oTotal,oDelivery,oDate,oStatus);
+            com.ID = rs.getInt(ORDER_ID);
+            com.USERNAME = rs.getString(USER_NAME);
+            com.NAME = rs.getString(PROD_PRODUCT_NAME);
+            com.DESCRIPTION = rs.getString(PROD_PRODUCT_DESCRIPTION);
+            com.COUNT = rs.getString(ORDER_COUNT);
+            com.PRICE = rs.getFloat(ORDER_TOTAL);
+            com.DELIVERY = rs.getString(ORDER_DELIVERY);
+            com.DATA = rs.getDate(ORDER_DATE);
+            com.STATUS = rs.getString(ORDER_STATUS);
+
+            System.out.format("%-4s %-8s %-10s %-20s %-5s %-8.2f %-10s %-10s %-10s\n", com.ID,com.USERNAME,com.NAME,com.DESCRIPTION,com.COUNT,com.PRICE,com.DELIVERY,com.DATA,com.STATUS);
         }while (rs.next());
         System.out.println("---------------------------------------------------------------------------------------------------");
         rs.close();

@@ -37,13 +37,15 @@ public class CommonMethods {
 
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
+        System.out.format("%-10s %-25s %-1s\n", "Name", "Model", "Price");
+        System.out.println("-------------------------------------------------");
+
         while (rs.next()) {
             com.NAME = rs.getString(PROD_PRODUCT_NAME);
             com.DESCRIPTION = rs.getString(PROD_PRODUCT_DESCRIPTION);
             com.PRICE = rs.getFloat(PROD_PRODUCT_PRICE);
 
-            // print the results
-            System.out.format("Name: %s\t Model: %s\t EUR %s\n", com.NAME, com.DESCRIPTION, com.PRICE);
+            System.out.format("%-10s %-25s € %-1s\n", com.NAME, com.DESCRIPTION, com.PRICE);
         }
 
     }

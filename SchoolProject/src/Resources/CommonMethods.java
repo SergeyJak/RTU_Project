@@ -67,17 +67,21 @@ public class CommonMethods {
         CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
+        System.out.format("%-4s %-10s %-25s %-10s %-8s %s\n", "ID", "Co. Name", "Model", "Delivery", "Price", "Status");
+        System.out.println("------------------------------------------------------------------------------------------");
+
         while (rs.next()) {
             com.ID = rs.getInt(ORDER_ID);
-            com.COUNT = rs.getString(ORDER_COUNT);
+            com.NAME = rs.getString(PROD_PRODUCT_NAME);
             com.PRICE = rs.getFloat(ORDER_TOTAL);
             com.DELIVERY = rs.getString(ORDER_DELIVERY);
             com.STATUS = rs.getString(ORDER_STATUS);
-            com.NAME = rs.getString(PROD_PRODUCT_COUNT);
             com.MODEL = rs.getString(PROD_PRODUCT_DESCRIPTION);
 
-            System.out.format("ID: %s\t\t Product Model: %s\t %s\t Count: %s\t Price: %s €\t Delivery: %s\t Status: %s\n", com.ID, com.NAME, com.MODEL, com.COUNT, com.PRICE, com.DELIVERY, com.STATUS);
+
+            System.out.format("%-4s %-10s %-25s %-10s € %-8s %s\n", com.ID, com.NAME, com.MODEL, com.DELIVERY, com.PRICE, com.STATUS);
         }
+        rs.close();
     }
     public static void insertServiceLine(String query, int userId, String productName, String brokenDetail, String prodDescription) throws SQLException, IOException, ClassNotFoundException {
 
@@ -109,6 +113,7 @@ public class CommonMethods {
 
             System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", com.ID, com.NAME, com.DATA, com.BROKEN_DETAIL, com.PRICE, com.STATUS);
         }
+        rs.close();
     }
     
     public static void returnServiceListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {

@@ -36,6 +36,7 @@ public class Constants {
     public static final String INF_MSG_ORDER_CHOICE = "Please enter order, or choose \"exit\" to return in main menu:";
     public static final String INF_MSG_PRODUCT = "All information about your product: ";
     public static final String ADMIN_CHOICE = "\nView orders - [vo]\nView services - [vs]\nEdit orders- [eo]\nEdit services- [es]\nSearch- [srch]\nExit -[exit]";
+
     //actions strings
     public static final String EXIT = "exit";
     public static final String NEW_ORD = "new";
@@ -80,6 +81,16 @@ public class Constants {
     static final String SERVICE_DESCRITPION = "description";
     static final String SERVICE_STATUS = "status";
     static final String SERVICE_PRICE = "price";
+
+    //print tables header
+    static final String HEADER_ID = "ID";
+    static final String HEADER_NAME = "Name";
+    static final String HEADER_MODEL = "Model";
+    static final String HEADER_PRICE = "Price";
+    static final String HEADER_DELIVERY = "Delivery";
+    static final String HEADER_STATUS = "Status";
+    static final String HEADER_REQ_DATE = "Request Date";
+    static final String HEADER_DETAILS = "Details";
     
     
 }

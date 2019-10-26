@@ -37,7 +37,7 @@ public class CommonMethods {
 
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
-        System.out.format("%-10s %-25s %-1s\n", "Name", "Model", "Price");
+        System.out.format("%-10s %-25s %-1s\n", HEADER_NAME, HEADER_MODEL, HEADER_PRICE);
         System.out.println("-------------------------------------------------");
 
         while (rs.next()) {
@@ -69,7 +69,7 @@ public class CommonMethods {
         CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
-        System.out.format("%-4s %-10s %-25s %-10s %-8s %s\n", "ID", "Co. Name", "Model", "Delivery", "Price", "Status");
+        System.out.format("%-4s %-10s %-25s %-10s %-8s %s\n", HEADER_ID, HEADER_NAME, HEADER_MODEL, HEADER_DELIVERY, HEADER_PRICE, HEADER_STATUS);
         System.out.println("------------------------------------------------------------------------------------------");
 
         while (rs.next()) {
@@ -102,7 +102,7 @@ public class CommonMethods {
         CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
-        System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", "ID", "Product Name", "Request Date", "Detail", "Total Price", "Status");
+        System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", HEADER_ID, HEADER_NAME, HEADER_REQ_DATE, HEADER_DETAILS, HEADER_PRICE, HEADER_STATUS);
         System.out.println("------------------------------------------------------------------------------------------");
 
         while (rs.next()) {

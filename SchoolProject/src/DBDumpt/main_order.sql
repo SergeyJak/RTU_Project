@@ -38,7 +38,7 @@ CREATE TABLE `order` (
   KEY `product_name_idx` (`product_id`),
   CONSTRAINT `order_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   CONSTRAINT `product_name` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (1,2,3,'1','489','courier','from 14',NULL,'submited'),(2,3,1,'1','1140','mail',NULL,NULL,'declined'),(3,2,6,'2','498','mail',NULL,NULL,'submited'),(4,4,2,'3','1797','at shop',NULL,NULL,'submited'),(5,2,8,'1','125.3','at shop',NULL,NULL,'approved'),(6,2,3,'4','1956','courier','124 code',NULL,'delivered'),(7,2,1,'1','333.33','shop','test',NULL,'submited'),(8,2,1,'1','333.33','shop','test',NULL,'submited'),(9,2,1,'1','1140.0','shop','test',NULL,'submited'),(10,2,1,'1','1140.0','shop','test',NULL,'submited'),(11,2,2,'1','599.0','mail','no comment',NULL,'submited'),(12,3,3,'1','489.0','mail','no',NULL,'submited');
+INSERT INTO `order` VALUES (1,2,3,'1','489','courier','from 14',NULL,'submited'),(2,3,1,'1','1140','mail',NULL,NULL,'new'),(3,2,6,'2','498','mail',NULL,NULL,'submited'),(4,4,2,'3','1797','at shop',NULL,NULL,'submited'),(5,2,8,'1','125.3','at shop',NULL,NULL,'approved'),(6,2,3,'4','1956','courier','124 code',NULL,'delivered'),(7,2,1,'1','333.33','shop','test',NULL,'submited'),(8,2,1,'1','333.33','shop','test',NULL,'submited'),(9,2,1,'1','1140.0','shop','test',NULL,'submited'),(10,2,1,'1','1140.0','shop','test',NULL,'submited'),(11,2,2,'1','599.0','mail','no comment',NULL,'submited'),(12,3,3,'1','489.0','mail','no',NULL,'submited'),(13,2,5,'1','189.0','shop','tdsfds',NULL,'submited'),(14,3,7,'1','395.19','shop','tret',NULL,'submited');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-21 20:42:45
+-- Dump completed on 2019-10-26 14:17:41

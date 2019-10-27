@@ -30,11 +30,11 @@ CREATE TABLE `service` (
   `broken_detail` varchar(45) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
   `status` varchar(45) DEFAULT 'SUBMITED',
-  `price` varchar(45) DEFAULT 'NOT SET',
+  `price` float DEFAULT NULL,
   PRIMARY KEY (`service_id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `service` (
 
 LOCK TABLES `service` WRITE;
 /*!40000 ALTER TABLE `service` DISABLE KEYS */;
-INSERT INTO `service` VALUES (1,2,'Samsung s10+','2019-10-21','Display','Fix that ASAP','SUBMITED','NOT SET'),(2,3,'Nokia 3310','2019-10-21','button','no','SUBMITED','NOT SET');
+INSERT INTO `service` VALUES (1,2,'Samsung s10+','2019-10-21','Display','Fix that ASAP','SUBMITED',NULL),(2,3,'Nokia 3310','2019-10-21','button','no','exit',10),(3,2,'Nokia','2019-10-22','3310','reret','SUBMITED',NULL),(4,2,'LG','2019-10-22','Note','Note','SUBMITED',NULL),(5,2,'testr','2019-10-26','display','nothing','SUBMITED',NULL);
 /*!40000 ALTER TABLE `service` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-21 20:42:45
+-- Dump completed on 2019-10-26 14:17:41

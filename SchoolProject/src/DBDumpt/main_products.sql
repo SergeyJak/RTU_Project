@@ -39,7 +39,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,'Samsung','Galaxy Not 10+',1140,3),(2,'Samsung','Galaxy S9+ ',599,2),(3,'Samsung','Galaxy A80 ',489,0),(4,'Samsung','Galaxy S9',549,15),(5,'Samsung','Galaxy J4+',189,2),(6,'LG','Q60 Thin Q Dual SIM',249,0),(7,'LG','G7 ThinQ',395.19,2),(8,'LG','Q7 (Q610) Dual SIM',125.3,0),(9,'Nokia','Nokia 4.2 Dual SIM',179,6),(10,'Nokia','2.2',99,6),(11,'Nokia','8 Dual SIM',279.3,NULL);
+INSERT INTO `products` VALUES (1,'Samsung','Galaxy Not 10+',1140,6),(2,'Samsung','Galaxy S9+ ',599,2),(3,'Samsung','Galaxy A80 ',489,24),(4,'Samsung','Galaxy S9',549,15),(5,'Samsung','Galaxy J4+',189,1),(6,'LG','Q60 Thin Q Dual SIM',249,56),(7,'LG','G7 ThinQ',395.19,1),(8,'LG','Q7 (Q610) Dual SIM',125.3,0),(9,'Nokia','Nokia 4.2 Dual SIM',179,6),(10,'Nokia','2.2',99,6),(11,'Nokia','8 Dual SIM',279.3,NULL);
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-21 20:42:45
+-- Dump completed on 2019-10-26 14:17:41

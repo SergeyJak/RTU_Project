@@ -1,7 +1,6 @@
 package Actions;
 
 import DataBase.ConnectionToDB;
-import Resources.Constants;
 
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -10,6 +9,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import static Resources.CommonMethods.ClearScreen;
+import static Resources.Constants.*;
 
 public class LoginActions {
     public static void loginToPortal() throws SQLException, IOException, ClassNotFoundException {
@@ -21,13 +21,13 @@ public class LoginActions {
 
         do {
 
-            System.out.print(Constants.ENTER_LOGIN);
+            System.out.print(ENTER_LOGIN);
             userLogin = in.nextLine();
 
-            if (userLogin.equals(Constants.EXIT))
+            if (userLogin.equals(EXIT))
                 break;
 
-            ResultSet userTable = connection.executeQuery("select * from main.user where " + Constants.USER_COLUMN + " = '" + userLogin + "'");
+            ResultSet userTable = connection.executeQuery("select * from main.user where " + USER_NAME + " = '" + userLogin + "'");
 
 
             passwordVerification(userTable, userLogin, in);
@@ -42,26 +42,26 @@ public class LoginActions {
         while (userTable.next())
 
             //Password verification
-            if (userTable.getString(Constants.USER_COLUMN).equals(userLogin)){
+            if (userTable.getString(USER_NAME).equals(userLogin)){
 
-                System.out.print(Constants.ENTER_PASS);
+                System.out.print(ENTER_PASS);
                 password = in.nextLine();
-                if (password.equals(userTable.getString(Constants.PASSWORD_COLUMN))){
-                    if (Constants.ADMIN_PERMISSIONS == userTable.getInt(Constants.LEVEL_COLUMN)){
+                if (password.equals(userTable.getString(USER_PASSWORD))){
+                    if (ADMIN_PERMISSIONS == userTable.getInt(USER_LEVEL)){
 
-                        AdminActions.adminChoice();
+                        AdminActions.adminChoice(userLogin);
 
-                    } else if (Constants.USER_PERMISSIONS == userTable.getInt(Constants.LEVEL_COLUMN)){
+                    } else if (USER_PERMISSIONS == userTable.getInt(USER_LEVEL)){
 
-                        UsersActions.userMainChoice(userTable.getInt(Constants.USER_ID_COLUMN));
+                        UsersActions.userMainChoice(userTable.getInt(USER_ID));
 
                     }else
-                        System.out.println(Constants.UNEXPECTED_USER_LEVEL);
+                        System.out.println(UNEXPECTED_USER_LEVEL);
                 }else
-                    System.out.println(Constants.WRONG_PASS);
+                    System.out.println(WRONG_PASS);
 
             }else
-                System.out.println(Constants.TRY_AGAIN); //Bug!!! Can't call try again message
+                System.out.println(TRY_AGAIN); //Bug!!! Can't call try again message
 
         ClearScreen();
 

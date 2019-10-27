@@ -144,6 +144,26 @@ public class CommonMethods {
         connectionToDb().prepareStatement(query).execute();
         
     }
+    public static void returnSearchResult(String query) throws SQLException, ClassNotFoundException, IOException {
+        ResultSet rs = connectionToDb().createStatement().executeQuery(query);
+
+        System.out.println("\nNr   User ID    Product ID    Count    Total    Delivery   Description      Date      Status");
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        while (rs.next()) {
+            String oID = rs.getString(ORDER_ID);
+            String oUser = rs.getString(ORDER_USER_ID);
+            String oProdID = rs.getString(ORDER_PRODUCT_ID);
+            Integer oCount = rs.getInt("count");
+            Float oTotal = rs.getFloat("total_price");
+            String oDelivery = rs.getString(ORDER_DELIVERY);
+            String oDescr = rs.getString(ORDER_DESCRIPTION);
+            String oDate = rs.getString(ORDER_DATE);
+            String oStatus = rs.getString(ORDER_STATUS);
+
+            // print the results
+            System.out.format("%-6s %-12s %-12s %-4s %-8.2f %-12s %-16s %-8s %-10s\n", oID,oUser,oProdID,oCount,oTotal,oDelivery,oDescr,oDate,oStatus);
+        }
+    }
 }
 
 

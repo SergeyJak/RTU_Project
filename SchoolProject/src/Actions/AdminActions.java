@@ -1,5 +1,8 @@
 package Actions;
 
+import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -80,7 +83,7 @@ class AdminActions {
 	private static void editOrder() throws ClassNotFoundException, SQLException, IOException{
 		Scanner inn = new Scanner(System.in);
 		System.out.println("Choose order which status should be changed:");
-		String order_id = inn.nextLine();
+		String order_id = inn.nextLine();// ne nado li tut int?
 		String query = "Select \n" +
                  "O.order_id,U.username, P.product_name, P.product_description,O.count,O.total_price,O.delivery, O.date, O.status\n" +
                  "FROM main.products P\n" +
@@ -97,8 +100,38 @@ class AdminActions {
 
     }
     
-    private static void search() {
-    	// Valery part
-
+    private static void search() throws SQLException, IOException, ClassNotFoundException {
+    String mainSearch;
+        Scanner typeSearch = new Scanner(System.in);
+        System.out.println("Choose Search field\n By status: [status]\n By order id number: [order_id] \n By delivery: [delivery]");
+        mainSearch = typeSearch.nextLine();
+            switch (mainSearch){
+                case "status":
+                    String prodState;
+                    Scanner status = new Scanner(System.in);
+                    System.out.println("Choose status: [approved], [declined], [delivered] or [submited]");
+                    prodState = status.nextLine();
+                    System.out.println(prodState);
+                    String query1 = "Select * FROM main.order where status = \"" +  prodState + "\"";
+                    returnSearchResult(query1);
+                    break;
+                case "delivery":
+                    String deliveryType;
+                    Scanner statusDel = new Scanner(System.in);
+                    System.out.println("Choose delivery type: [mail], [shop] or [courier]");
+                    deliveryType = statusDel.nextLine();
+                    String query2 = "Select * FROM main.order where delivery = \"" + deliveryType + "\"";
+                    returnSearchResult(query2);
+                    break;
+                case "order_id":
+                    String orderID;
+                    Scanner number = new Scanner(System.in);
+                    System.out.println("Enter order number: ____");
+                    orderID = number.nextLine();
+                    String query3 = "Select * FROM main.order where order_id = \"" + orderID + "\"";
+                    returnSearchResult(query3);
+                    break;
+            }
+         }
     }
-}
+

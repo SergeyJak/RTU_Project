@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import static DataBase.ConnectionToDB.connectionToDb;
-import static Resources.CommonMethods.changeStatusForService;
-import static Resources.CommonMethods.isFloat;
 import static Resources.Constants.*;
 import static Actions.AdminActions.*;
 
@@ -129,7 +127,7 @@ public class CommonMethods {
         }
         System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6s %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------");
-        do{
+        while (rs.next()){
             com.ID = rs.getInt(SERVICE_ID);
             com.USERNAME = rs.getString(USER_NAME);
             com.NAME = rs.getString(SERVICE_PR_NAME);
@@ -140,18 +138,18 @@ public class CommonMethods {
             com.STATUS = rs.getString(SERVICE_STATUS);
 
             System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",com.ID,com.USERNAME,com.NAME,com.DATA,com.BROKEN_DETAIL,com.DESCRIPTION,com.PRICE,com.STATUS);
-        }while (rs.next());
+        }
         System.out.println("---------------------------------------------------------------------------------------------");
         rs.close();
     }
- 
+
     public static void changeStatusForService(String service_id,String statusNew,String priceNew) throws SQLException, ClassNotFoundException, IOException {
 
     	String UpdateQuery = "UPDATE main.service SET status = (" + " \"" + statusNew + "\"" + "), price = (" + " \"" + priceNew + "\"" + ") WHERE service_id = " + service_id + ";";
         connectionToDb().prepareStatement(UpdateQuery).execute();
 		System.out.format("Status for order %2s is changed to %s and new price is %s\n",service_id,statusNew,priceNew);
     }
-    
+
     public static void returnOrderListByQuery(String query) throws SQLException, ClassNotFoundException, IOException {
         CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
@@ -176,22 +174,39 @@ public class CommonMethods {
         }while (rs.next());
         System.out.println("---------------------------------------------------------------------------------------------------");
         rs.close();
-    } 
+    }
 
 	public static void changeStatusForOrder(String order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
-        String query2 = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + ";";
+        String query2 = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + "";
         connectionToDb().prepareStatement(query2).execute();
 		System.out.format("Status for order %2s is changed to %s\n",order_id,statusNew);
     }
-	
+
 	public static boolean isNumeric(String strNum) {
 	    return strNum.matches("\\d+");
 	}
-	
-	public static boolean isFloat(String strFloat) {
-	    return strFloat.matches("^(?=.*\\d)\\d*(?:\\.\\d\\d)?$");
-	
-	}
+    public static void returnSearchResult(String query) throws SQLException, ClassNotFoundException, IOException {
+        ResultSet rs = connectionToDb().createStatement().executeQuery(query);
+
+        System.out.println("\nNr   User ID    Product ID    Count    Total    Delivery   Description      Date      Status");
+        System.out.println("-----------------------------------------------------------------------------------------------");
+        while (rs.next()) {
+            String oID = rs.getString(ORDER_ID);
+            String oUser = rs.getString(ORDER_USER_ID);
+            String oProdID = rs.getString(ORDER_PRODUCT_ID);
+            Integer oCount = rs.getInt("count");
+            Float oTotal = rs.getFloat("total_price");
+            String oDelivery = rs.getString(ORDER_DELIVERY);
+            String oDescr = rs.getString(ORDER_DESCRIPTION);
+            String oDate = rs.getString(ORDER_DATE);
+            String oStatus = rs.getString(ORDER_STATUS);
+
+            // print the results
+            System.out.format("%-6s %-12s %-12s %-4s %-8.2f %-12s %-16s %-8s %-10s\n", oID,oUser,oProdID,oCount,oTotal,oDelivery,oDescr,oDate,oStatus);
+        }
+    }
+
+
 }
 
 

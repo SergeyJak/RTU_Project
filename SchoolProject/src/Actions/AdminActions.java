@@ -11,7 +11,7 @@ import static DataBase.ConnectionToDB.connectionToDb;
 import static Resources.CommonMethods.*;
 import static Resources.Constants.*;
 
-class AdminActions {
+public class AdminActions {
     static void adminChoice() throws SQLException, IOException, ClassNotFoundException {
         String mainChoice;
 

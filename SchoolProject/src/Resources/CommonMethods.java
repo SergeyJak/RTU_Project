@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import static DataBase.ConnectionToDB.connectionToDb;
+import static Resources.CommonMethods.changeStatusForService;
+import static Resources.CommonMethods.isFloat;
 import static Resources.Constants.*;
 import static Actions.AdminActions.*;
 
@@ -127,7 +129,7 @@ public class CommonMethods {
         }
         System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6s %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------");
-        while (rs.next()){
+        do{
             com.ID = rs.getInt(SERVICE_ID);
             com.USERNAME = rs.getString(USER_NAME);
             com.NAME = rs.getString(SERVICE_PR_NAME);
@@ -138,7 +140,7 @@ public class CommonMethods {
             com.STATUS = rs.getString(SERVICE_STATUS);
 
             System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",com.ID,com.USERNAME,com.NAME,com.DATA,com.BROKEN_DETAIL,com.DESCRIPTION,com.PRICE,com.STATUS);
-        }
+        }while (rs.next());
         System.out.println("---------------------------------------------------------------------------------------------");
         rs.close();
     }
@@ -177,7 +179,7 @@ public class CommonMethods {
     } 
 
 	public static void changeStatusForOrder(String order_id,String statusNew) throws SQLException, ClassNotFoundException, IOException {
-        String query2 = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + "";
+        String query2 = "UPDATE main.order SET status = (" + " \"" + statusNew + "\"" + ") WHERE order_id = " + order_id + ";";
         connectionToDb().prepareStatement(query2).execute();
 		System.out.format("Status for order %2s is changed to %s\n",order_id,statusNew);
     }
@@ -186,7 +188,10 @@ public class CommonMethods {
 	    return strNum.matches("\\d+");
 	}
 	
+	public static boolean isFloat(String strFloat) {
+	    return strFloat.matches("^(?=.*\\d)\\d*(?:\\.\\d\\d)?$");
 	
+	}
 }
 
 

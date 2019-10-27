@@ -49,7 +49,7 @@ public class LoginActions {
                 if (password.equals(userTable.getString(USER_PASSWORD))){
                     if (ADMIN_PERMISSIONS == userTable.getInt(USER_LEVEL)){
 
-                        AdminActions.adminChoice(userLogin);
+                        AdminActions.adminChoice();
 
                     } else if (USER_PERMISSIONS == userTable.getInt(USER_LEVEL)){
 

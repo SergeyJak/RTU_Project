@@ -127,18 +127,18 @@ public class CommonMethods {
         }
         System.out.format("\n%-4s %-8s %-15s %-10s %-10s %-25s %-6s %-10s","Nr","User","Product","Date","Detail","Description","Amount","Status");
         System.out.println("\n---------------------------------------------------------------------------------------------");
-        while (rs.next()){
+        do{
             com.ID = rs.getInt(SERVICE_ID);
             com.USERNAME = rs.getString(USER_NAME);
             com.NAME = rs.getString(SERVICE_PR_NAME);
             com.DATA = rs.getDate(SERVICE_DATE);
             com.BROKEN_DETAIL = rs.getString(SERVICE_DETAIL);
-            com.DESCRIPTION = rs.getString(SERVICE_DESCRITPION);
+            com.DESCRIPTION = rs.getString(SERVICE_DESCRIPTION);
             com.PRICE = rs.getFloat(SERVICE_PRICE);
             com.STATUS = rs.getString(SERVICE_STATUS);
 
             System.out.format("%-4s %-8s %-15s %-10s %-10s %-25s %-6.2f %-10s\n",com.ID,com.USERNAME,com.NAME,com.DATA,com.BROKEN_DETAIL,com.DESCRIPTION,com.PRICE,com.STATUS);
-        }
+        }while (rs.next());
         System.out.println("---------------------------------------------------------------------------------------------");
         rs.close();
     }

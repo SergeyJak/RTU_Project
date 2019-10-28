@@ -56,29 +56,26 @@ public class Constants {
     //user table
     public static final String USER_ID = "user_id";
 	public static final String USER_NAME = "username";
-    public static final String USER_EMAIL = "email";
     public static final String USER_PASSWORD = "password";
-    public static final String USER_TIME = "create_time";
     public static final String USER_LEVEL = "user_level";
 
     //order table
     static final String ORDER_ID = "order_id";
-    public static final String ORDER_USER_ID = "user_id";
-    public static final String ORDER_PRODUCT_ID = "product_id";
+    static final String ORDER_USER_ID = "user_id";
+    static final String ORDER_PRODUCT_ID = "product_id";
     static final String ORDER_COUNT = "count";
     static final String ORDER_TOTAL = "total_price";
     static final String ORDER_DELIVERY = "delivery";
-    public static final String ORDER_DESCRIPTION = "description";
+    static final String ORDER_DESCRIPTION = "description";
     static final String ORDER_DATE = "date";
     static final String ORDER_STATUS = "status";
     
     //service table
     static final String SERVICE_ID = "service_id";
-    public static final String SERVICE_USER_ID = "user_id";
     static final String SERVICE_PR_NAME = "product_name";
     static final String SERVICE_DATE = "date";
     static final String SERVICE_DETAIL = "broken_detail";
-    static final String SERVICE_DESCRITPION = "description";
+    static final String SERVICE_DESCRIPTION = "description";
     static final String SERVICE_STATUS = "status";
     static final String SERVICE_PRICE = "price";
 

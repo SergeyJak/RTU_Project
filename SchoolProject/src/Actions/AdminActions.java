@@ -1,8 +1,5 @@
 package Actions;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -77,6 +74,7 @@ public class AdminActions {
     }
 
 	public static void editOrder() throws ClassNotFoundException, SQLException, IOException{
+        ClearScreen();
 		Scanner inn = new Scanner(System.in);
 		System.out.println("Choose order which status should be changed:");
 		String order_id = inn.nextLine();
@@ -96,14 +94,18 @@ public class AdminActions {
 		}
 		else {
 			System.out.print("Wrong input\n");
-			editOrder();
+            adminChoice();
 		}
     }
     
     public static void editService() throws ClassNotFoundException, SQLException, IOException{
+        ClearScreen();
     	Scanner inn = new Scanner(System.in);
 		System.out.println("Choose service which status should be changed:");
 		String service_id = inn.nextLine();
+        if (service_id.equals(EXIT)){
+            adminChoice();
+        }
 
 		if (isNumeric(service_id)){
         String query = "Select \n" +
@@ -115,8 +117,14 @@ public class AdminActions {
         returnServiceListByQuery(query);
 		System.out.println("\nChoose new status:");
 		String statusNew = inn.nextLine();
+		if (statusNew.equals(EXIT)){
+            adminChoice();
+        }
 		System.out.println("\nChoose new price:");
 		String priceNew = inn.nextLine();
+		if (priceNew.equals(EXIT)){
+                adminChoice();
+		}
 		changeStatusForService(service_id,statusNew,priceNew);
 		}
 		else {
@@ -127,6 +135,7 @@ public class AdminActions {
 
     
     private static void search() throws SQLException, IOException, ClassNotFoundException {
+        ClearScreen();
     String mainSearch;
         Scanner typeSearch = new Scanner(System.in);
         System.out.println("Choose Search field\n By status: [status]\n By order id number: [order_id] \n By delivery: [delivery]");

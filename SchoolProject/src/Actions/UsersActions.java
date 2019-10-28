@@ -6,21 +6,24 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static DataBase.ConnectionToDB.connectionToDb;
+
 import static Resources.CommonMethods.*;
 import static Resources.Constants.*;
 
 class UsersActions {
     static void userMainChoice(int userId) throws SQLException, ClassNotFoundException, IOException {
         String mainChoice;
+        ClearScreen();
 
         Scanner in = new Scanner(System.in);
 
         connectionToDb();
 
-        System.out.println(INF_MSG_USER_MAIN); //Message should be updated
-
 
         do {
+            System.out.println("-------------------------------------------------");
+            System.out.println(INF_MSG_USER_MAIN); //Message should be updated
+
             System.out.print(DO_CHOICE);
             mainChoice = in.nextLine();
 

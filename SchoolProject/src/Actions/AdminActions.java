@@ -39,9 +39,7 @@ public class AdminActions {
                 case "srch":
                 	search();
                     break;
-                case EXIT:
-                    System.out.println(RETURN_TO_LOGIN);
-                    break;
+
                 default:
                     System.out.println(WRONG_CHOICE);
                     break;
@@ -87,54 +85,63 @@ public class AdminActions {
                  "INNER JOIN main.user U ON U.user_id=O.user_id\n"+
                  "where O.order_id = " + order_id + ";";
 
-		returnOrderListByQuery(query);		
-		System.out.println("\nChoose new status:"); 
-		String statusNew = inn.nextLine();
-		changeStatusForOrder(order_id,statusNew);
-		}
+            returnOrderListByQuery(query);
+            System.out.println("\nChoose new status:");
+            String statusNew = inn.nextLine();
+            if (statusNew.equals(EXIT)) {
+                adminChoice();
+            }
+            changeStatusForOrder(order_id,statusNew);
+        }
+        else if(order_id.equals(EXIT)) {
+            adminChoice();
+        }
 		else {
 			System.out.print("Wrong input\n");
             adminChoice();
 		}
     }
     
-    public static void editService() throws ClassNotFoundException, SQLException, IOException{
+    public static void editService() throws ClassNotFoundException, SQLException, IOException {
         ClearScreen();
-    	Scanner inn = new Scanner(System.in);
-		System.out.println("Choose service which status should be changed:");
-		String service_id = inn.nextLine();
-        if (service_id.equals(EXIT)){
+        Scanner inn = new Scanner(System.in);
+        System.out.println("Choose service which status should be changed:");
+        String service_id = inn.nextLine();
+        if (service_id.equals(EXIT)) {
             adminChoice();
         }
 
-		if (isNumeric(service_id)){
-        String query = "Select \n" +
-        		"S.service_id,U.username, S.product_name,S.date, S.description,S.broken_detail, S.status, S.price\n" +
-        		"FROM main.user U\n" +
-        		"INNER JOIN main.service S ON U.user_id=S.user_id\n" +
-                "where S.service_id = " + service_id + ";";
+        if (isNumeric(service_id)) {
+            String query = "Select \n" +
+                    "S.service_id,U.username, S.product_name,S.date, S.description,S.broken_detail, S.status, S.price\n" +
+                    "FROM main.user U\n" +
+                    "INNER JOIN main.service S ON U.user_id=S.user_id\n" +
+                    "where S.service_id = " + service_id + ";";
 
-        returnServiceListByQuery(query);
-		System.out.println("\nChoose new status:");
-		String statusNew = inn.nextLine();
-		if (statusNew.equals(EXIT)){
-            adminChoice();
-        }
-		System.out.println("\nChoose new price:");
-		String priceNew = inn.nextLine();
-		if (priceNew.equals(EXIT)){
+            returnServiceListByQuery(query);
+            System.out.println("\nChoose new status:");
+            String statusNew = inn.nextLine();
+            if (statusNew.equals(EXIT)) {
                 adminChoice();
-		}
-		changeStatusForService(service_id,statusNew,priceNew);
-		}
-		else {
-			System.out.println("Wrong input\n");
-			editService();
-			}
-		}
+            } else {
+                System.out.println("\nEnter new price:");
+                String priceNew = inn.nextLine();
+                if (isFloat(priceNew)) {
+                    changeStatusForService(service_id, statusNew, priceNew);
+                } else if (priceNew.equals(EXIT)) {
+                    adminChoice();
+                } else {
+                    System.out.println("Wrong input\n");
+                    editService();
+                }
 
-    
-    private static void search() throws SQLException, IOException, ClassNotFoundException {
+            }
+        } else {
+            System.out.println("Wrong input\n");
+            editService();
+        }
+    }
+        private static void search() throws SQLException, IOException, ClassNotFoundException {
         ClearScreen();
     String mainSearch;
         Scanner typeSearch = new Scanner(System.in);

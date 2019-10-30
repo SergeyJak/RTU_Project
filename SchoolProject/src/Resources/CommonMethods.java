@@ -102,7 +102,7 @@ public class CommonMethods {
         CommonMethods com = new CommonMethods();
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 
-        System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", HEADER_ID, HEADER_NAME, HEADER_REQ_DATE, HEADER_DETAILS, HEADER_PRICE, HEADER_STATUS);
+        System.out.format("%-4s %-16s %-17s %-11s Total € %-8.6s %s\n", HEADER_ID, HEADER_NAME, HEADER_REQ_DATE, HEADER_DETAILS, HEADER_PRICE, HEADER_STATUS);
         System.out.println("------------------------------------------------------------------------------------------");
 
         while (rs.next()) {
@@ -113,7 +113,7 @@ public class CommonMethods {
             com.STATUS = rs.getString(SERVICE_STATUS);
             com.PRICE = rs.getFloat(SERVICE_PRICE);
 
-            System.out.format("%-4s %-16s %-17s %-11s Total € %-8.2s %s\n", com.ID, com.NAME, com.DATA, com.BROKEN_DETAIL, com.PRICE, com.STATUS);
+            System.out.format("%-4s %-16s %-17s %-11s Total € %-8.6s %s\n", com.ID, com.NAME, com.DATA, com.BROKEN_DETAIL, com.PRICE, com.STATUS);
         }
         rs.close();
     }
@@ -145,7 +145,7 @@ public class CommonMethods {
 
     public static void changeStatusForService(String service_id,String statusNew,String priceNew) throws SQLException, ClassNotFoundException, IOException {
 
-    	String UpdateQuery = "UPDATE main.service SET status = (" + " \"" + statusNew + "\"" + "), price = (" + " \"" + priceNew + "\"" + ") WHERE service_id = " + service_id + ";";
+    	String UpdateQuery = "UPDATE main.service SET status = (" + " \"" + statusNew + "\"" + "), price = (" + " \"" + priceNew + "\"" + ") WHERE service_id = " + service_id + "";
         connectionToDb().prepareStatement(UpdateQuery).execute();
 		System.out.format("Status for order %2s is changed to %s and new price is %s\n",service_id,statusNew,priceNew);
     }
@@ -185,6 +185,8 @@ public class CommonMethods {
 	public static boolean isNumeric(String strNum) {
 	    return strNum.matches("\\d+");
 	}
+    public static boolean isFloat(String strFloat) {
+        return strFloat.matches("^(?=.*\\d)\\d*(?:\\.\\d\\d)?$");}
     public static void returnSearchResult(String query) throws SQLException, ClassNotFoundException, IOException {
         ResultSet rs = connectionToDb().createStatement().executeQuery(query);
 

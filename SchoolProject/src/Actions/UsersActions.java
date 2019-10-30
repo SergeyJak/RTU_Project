@@ -63,6 +63,8 @@ class UsersActions {
     private static void addNewOrder(int userId) throws SQLException, IOException, ClassNotFoundException { // new order method
         ClearScreen();
 
+        listProducts();
+
         Scanner in = new Scanner(System.in);
         System.out.println(INF_MSG_ORDER_CHOICE);
         System.out.println(ENTER_PROD_NAME);

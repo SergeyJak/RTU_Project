@@ -33,8 +33,8 @@ public class ConnectionToDB {
         FileInputStream file;
 
 //        String path = "C:\\Users\\sergejsj1\\Git_new\\SchoolProject\\src\\main.properties";
-       String path = "C:\\Users\\Sergey\\GitHub\\RTU_Project\\SchoolProject\\src\\main.properties";
-//        String path = "main.properties";
+//       String path = "C:\\Users\\Sergey\\GitHub\\RTU_Project\\SchoolProject\\src\\main.properties";
+        String path = "main.properties";
 
         file = new FileInputStream(path);
 

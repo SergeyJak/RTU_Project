@@ -61,8 +61,7 @@ public class LoginActions {
                     System.out.println(WRONG_PASS);
 
             }else
-                System.out.println(TRY_AGAIN); //Bug!!! Can't call try again message
-
+                System.out.println(TRY_AGAIN);
         ClearScreen();
 
     }
